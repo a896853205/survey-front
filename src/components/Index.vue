@@ -1,7 +1,7 @@
 <template>
   <div>
     // index.vue
-    <Head></Head>
+    <IndexHead></IndexHead>
     <SubHead></SubHead>
     <Slide></Slide>
     <Feature></Feature>
@@ -10,7 +10,7 @@
 
 <script>
 // 头主件
-import Head from './head/Header'
+import IndexHead from './indexChild/IndexHeader'
 // 副-头主件
 import SubHead from './head/Sub-header'
 // 幻灯片
@@ -21,7 +21,7 @@ import Feature from './indexChild/Feature'
 export default {
   name: 'index',
   components: {
-    Head,
+    IndexHead,
     SubHead,
     Slide,
     Feature
