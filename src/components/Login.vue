@@ -4,15 +4,17 @@
       <Head></Head>
       <LoginBody class="login-body"></LoginBody>
     </div>
-    
+      <Foot></Foot>
   </div>
 </template>
 
 <script>
-// 头主件
+// 头组件
 import Head from './head/Header'
-// 登录主体(左文字,右登录框)
+// 登录组体(左文字,右登录框)
 import LoginBody from './loginChild/LoginBody'
+// 底部组件
+import Foot from './foot/Footer'
 
 export default {
   name: 'login',
@@ -22,7 +24,8 @@ export default {
   },
   components: {
     Head,
-    LoginBody
+    LoginBody,
+    Foot
   },
   computed: {},
   methods: {}
