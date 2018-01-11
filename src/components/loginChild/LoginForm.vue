@@ -7,7 +7,7 @@
     <InputPack class="mar-bom-small"></InputPack>
     <ButtonPack>登录</ButtonPack>
     <div class="login-other">
-      <UlPack :linkList="otherList"></UlPack>
+      <UlPack :listClass="otherOpation.style" :linkList="otherOpation.data"></UlPack>
     </div>
     <div class="login-link">
       <span>其他方式登录:</span>
@@ -48,20 +48,24 @@ export default {
   name: 'loginform',
   data () {
     return {
-      otherList: [
-        {
-          name: '忘记密码',
-          href: ''
-        },
-        {
-          name: '忘记用户名',
-          href: ''
-        },
-        {
-          name: '免费注册',
-          href: ''
-        }
-      ]
+      // 其他链接配置
+      otherOpation: {
+        data: [
+          {
+            name: '忘记密码',
+            href: ''
+          },
+          {
+            name: '忘记用户名',
+            href: ''
+          },
+          {
+            name: '免费注册',
+            href: ''
+          }
+        ],
+        style: 'login-other-list'
+      }
     }
   },
   components: {
@@ -96,8 +100,7 @@ export default {
   display: block;
 }
 /* 登录描述结束 */
-
-/* 其他链接样式开始 */
+/* 登录方式样式开始 */
 .login-link {
   font-size: 12px;
   color: #373D41;
@@ -111,7 +114,7 @@ export default {
   display: inline;
   cursor: pointer;
 } 
-/* 其他链接样式结束 */
+/* 登录方式样式结束 */
 </style>
 <style>
 /* 其他选项开始 */
@@ -120,18 +123,6 @@ export default {
   margin-bottom: 28px;
   font-size: 12px;
   overflow: hidden;
-}
-.login-other > ul {
-  float: right;
-}
-.login-other > ul > li > a:link {
-  color: #73777A;
-}
-.login-other > ul > li > a:visited {
-  color: #73777A;
-}
-.login-other > ul > li > a:hover {
-  color: #00C1DE;
 }
 /* 其他选项结束 */
 </style>
