@@ -1,7 +1,7 @@
 <!-- Footer.vue -->
 <template>
   <div id="buttom">
-    <div class="container">
+    <div class="container" :class="type">
       <UlPack class="foot-base" :listClass="footBaseOpation.style" :linkList="footBaseOpation.data"></UlPack>
       <UlPack :listClass="footOtherOpation.style" :linkList="footOtherOpation.data"></UlPack>
       <p class="copyright">© 2009-2018 版权所有 ICP证：XXXX-200XXXXX </p>
@@ -14,6 +14,7 @@
 // 列表组件
 import UlPack from '../form/UlPack'
 export default {
+  props: ['type'],
   name: 'buttom',
   data () {
     return {
@@ -106,8 +107,8 @@ export default {
 <style scoped>
 #buttom {
   padding: 20px;
-  background: #373d41;
-  box-sizing: border-box
+  background:rgba(0,0,0,0);
+  box-sizing: border-box;
 }
 .container {
   width: 1200px;
@@ -120,4 +121,9 @@ export default {
 .copyright {
   color: #73777A;
 }
+/* 注册脚部不同处开始 */
+.register-foot {
+  border-top: 1px solid rgb(207, 208, 209);
+}
+/* 注册脚部不同处结束 */
 </style>

@@ -93,4 +93,21 @@ ul > li {
   color: #00C1DE;
 }
 /* login页头部样式结束 */
+/* register页头部样式开始*/
+.register-head-list > li {
+  padding: 0 20px;
+  font-size: 14px;
+  line-height: 60px;
+}
+.register-head-list > li > a:link {
+  color: #373D41;
+}
+.register-head-list > li > a:visited {
+  color: #373D41;
+}
+.register-head-list > li > a:hover {
+  color: #00C1DE;
+}
+
+/* register页头部样式结束*/
 </style>

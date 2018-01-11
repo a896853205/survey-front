@@ -1,7 +1,7 @@
 <!-- Header.vue -->
 <template>
-  <div id="top">
-    <UlPack class="login-head" :listClass="topList.style" :linkList="topList.data"></UlPack>
+  <div id="top" :class="type">
+    <UlPack class="head" :listClass="topList.style" :linkList="topList.data"></UlPack>
   </div>
 </template>
 
@@ -9,6 +9,7 @@
 // 列表组件
 import UlPack from '../form/UlPack'
 export default {
+  props: ['type'],
   name: 'top',
   data () {
     return {
@@ -20,7 +21,7 @@ export default {
           name: '首页',
           href: ''
         }],
-        style: 'login-head-list'
+        style: this.type
       }
     }
   },
@@ -34,9 +35,14 @@ export default {
 <style scoped>
 #top {
   height: 60px;
+}
+.login-head-list {
   border-bottom: 1px solid rgba(255,255,255,0.3);
 }
-.login-head {
+.register-head-list {
+  border-bottom: 1px solid #D7D8D9;
+}
+.head {
   float: right;
 }
 </style>

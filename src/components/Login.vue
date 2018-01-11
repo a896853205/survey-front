@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div id="login">
     <div class="login-background">
-      <Head></Head>
+      <Head type="login-head-list"></Head>
       <LoginBody class="login-body"></LoginBody>
     </div>
       <Foot></Foot>
@@ -32,6 +32,9 @@ export default {
 }
 </script>
 <style scoped>
+#login {
+  background: #373d41;
+}
 .login-background {
   background: url('../assets/login-background.jpg');
   background-size: cover;
