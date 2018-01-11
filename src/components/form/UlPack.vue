@@ -77,4 +77,20 @@ ul > li {
   color: #00C1DE;
 }
 /* login页脚other样式结束 */
+/* login页头部样式开始 */
+.login-head-list > li {
+  padding: 0 20px;
+  font-size: 14px;
+  line-height: 60px;
+}
+.login-head-list > li > a:link {
+  color: #fff;
+}
+.login-head-list > li > a:visited {
+  color: #fff;
+}
+.login-head-list > li > a:hover {
+  color: #00C1DE;
+}
+/* login页头部样式结束 */
 </style>

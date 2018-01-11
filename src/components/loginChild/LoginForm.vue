@@ -60,7 +60,7 @@ export default {
         },
         {
           name: '免费注册',
-          href: ''
+          href: '/#/register'
         }],
         style: 'login-other-list'
       },
