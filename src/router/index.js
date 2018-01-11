@@ -28,7 +28,11 @@ export default new Router({
     }, {
       path: '/home',
       name: 'home',
-      component: Home
+      component: Home,
+      // 这里进行token判断
+      beforeEnter: (to, from, next) => {
+
+      }
     }
   ]
 })

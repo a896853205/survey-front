@@ -1,6 +1,6 @@
 <!-- ButtonPack.vue -->
 <template>
-  <button class="button-pack">
+  <button @click="hit" type="button" class="button-pack">
     <slot>登录</slot>
   </button>
 </template>
@@ -14,7 +14,11 @@ export default {
   },
   components: {},
   computed: {},
-  methods: {}
+  methods: {
+    hit () {
+      this.$emit('hit')
+    }
+  }
 }
 </script>
 <style scoped>

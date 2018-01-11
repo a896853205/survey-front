@@ -1,12 +1,19 @@
 <template>
-  <input class="input-pack">
+  <input v-model="inputValue" :type="type" :placeholder="placeholder" class="input-pack">
 </template>
 
 <script>
 export default {
+  props: ['placeholder', 'type'],
   name: 'inputPack',
   data () {
     return {
+      inputValue: ''
+    }
+  },
+  watch: {
+    inputValue (val, oldVal) {
+      this.$emit('getValue', this.inputValue)
     }
   },
   components: {},

@@ -3,9 +3,9 @@
   <div id="loginform">
     <div class="form-title">密码登录</div>
     <small class="form-describe">淘宝及1688会员可直接使用会员名登录</small>
-    <InputPack class="mar-bom-small"></InputPack>
-    <InputPack class="mar-bom-small"></InputPack>
-    <ButtonPack>登录</ButtonPack>
+    <InputPack @getValue="getUser" type="text" placeholder="邮箱/会员名/8位ID" class="mar-bom-small"></InputPack>
+    <InputPack @getValue="getPassWord" type="password" placeholder="登录密码" class="mar-bom-small"></InputPack>
+    <ButtonPack @hit="login">登录</ButtonPack>
     <div class="login-other">
       <UlPack :listClass="otherOpation.style" :linkList="otherOpation.data"></UlPack>
     </div>
@@ -63,6 +63,10 @@ export default {
           href: ''
         }],
         style: 'login-other-list'
+      },
+      user: {
+        account: '',
+        password: ''
       }
     }
   },
@@ -72,7 +76,31 @@ export default {
     UlPack
   },
   computed: {},
-  methods: {}
+  methods: {
+    getUser (value) {
+      this.user.account = value
+    },
+    getPassWord (value) {
+      this.user.password = value
+    },
+    /**
+     * 登录函数
+     */
+    login () {
+      this.$http.post('users/login', this.user)
+      .then((res) => {
+        let result = res.data
+        if (result.status === 1) {
+          localStorage.setItem('token', result.token)
+        } else {
+          alert(result.errMessage)
+        }
+      })
+      .catch((e) => {
+        alert('网络错误,请稍后再试')
+      })
+    }
+  }
 }
 </script>
 <style scoped>
