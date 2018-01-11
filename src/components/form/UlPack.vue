@@ -22,8 +22,10 @@ export default {
 </script>
 <style scoped>
 /* 基本配置开始 */
+a {
+  transition: .2s;
+}
 ul > li {
-  margin-left: 16px;
   display: inline;
   cursor: pointer;
 }
@@ -31,6 +33,9 @@ ul > li {
 /* login页other样式开始 */
 .login-other-list {
   float: right;
+}
+.login-other-list > li {
+  margin-left: 16px;
 }
 .login-other-list > li > a:link {
   color: #73777A;
@@ -42,4 +47,34 @@ ul > li {
   color: #00C1DE;
 }
 /* login页other样式结束 */
+/* login页脚base样式开始 */
+.login-base-list > li {
+  margin-right: 35px;
+}
+.login-base-list > li > a:link {
+  color: #9b9ea0;
+}
+.login-base-list > li > a:visited {
+  color: #9b9ea0;
+}
+.login-base-list > li > a:hover {
+  color: #00C1DE;
+}
+/* login页脚base样式结束 */
+/* login页脚other样式开始 */
+.login-foot-other-list > li {
+  margin-right: 20px;
+  font-size: 14px;
+  line-height: 30px;
+}
+.login-foot-other-list > li > a:link {
+  color: #73777A;
+}
+.login-foot-other-list > li > a:visited {
+  color: #73777A;
+}
+.login-foot-other-list > li > a:hover {
+  color: #00C1DE;
+}
+/* login页脚other样式结束 */
 </style>

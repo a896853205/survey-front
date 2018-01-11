@@ -50,20 +50,18 @@ export default {
     return {
       // 其他链接配置
       otherOpation: {
-        data: [
-          {
-            name: '忘记密码',
-            href: ''
-          },
-          {
-            name: '忘记用户名',
-            href: ''
-          },
-          {
-            name: '免费注册',
-            href: ''
-          }
-        ],
+        data: [{
+          name: '忘记密码',
+          href: ''
+        },
+        {
+          name: '忘记用户名',
+          href: ''
+        },
+        {
+          name: '免费注册',
+          href: ''
+        }],
         style: 'login-other-list'
       }
     }
