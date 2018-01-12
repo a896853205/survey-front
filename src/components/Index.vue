@@ -1,9 +1,12 @@
+<!-- Index.vue -->
 <template>
   <div>
     // index.vue
-    <IndexHead></IndexHead>
-    <SubHead></SubHead>
-    <Slide></Slide>
+    <div>
+      <SubHead></SubHead>
+      <IndexHead></IndexHead>
+      <Slide></Slide>
+    </div>
     <Feature></Feature>
   </div>
 </template>
