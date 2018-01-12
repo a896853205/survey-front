@@ -2,7 +2,6 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 // 用户模块
 import User from './modules/user'
-
 // 使用Vuex
 Vue.use(Vuex)
 

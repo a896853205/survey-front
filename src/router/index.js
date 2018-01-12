@@ -8,7 +8,8 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 // 后台组件
 import Home from '@/components/Home'
-
+// 后台首页组件
+import HomeIndex from '@/components/homeChild/HomeIndex'
 Vue.use(Router)
 
 export default new Router({
@@ -29,10 +30,11 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: Home,
-      // 这里进行token判断
-      beforeEnter: (to, from, next) => {
-
-      }
+      children: [{
+        path: '/home/index',
+        name: 'homeindex',
+        component: HomeIndex
+      }]
     }
   ]
 })

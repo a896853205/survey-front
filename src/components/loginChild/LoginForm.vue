@@ -88,16 +88,21 @@ export default {
      */
     login () {
       this.$http.post('users/login', this.user)
-      .then((res) => {
+      .then(res => {
         let result = res.data
+        console.log(result)
         if (result.status === 1) {
           localStorage.setItem('token', result.token)
+          this.$http.defaults.headers.common['Authorization'] = result.token
+          // 发出跳页申请
+          location.href = '#/home/index'
         } else {
           alert(result.errMessage)
         }
       })
       .catch((e) => {
         alert('网络错误,请稍后再试')
+        console.log(e)
       })
     }
   }
