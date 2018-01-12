@@ -90,7 +90,6 @@ export default {
       this.$http.post('users/login', this.user)
       .then(res => {
         let result = res.data
-        console.log(result)
         if (result.status === 1) {
           localStorage.setItem('token', result.token)
           this.$http.defaults.headers.common['Authorization'] = result.token

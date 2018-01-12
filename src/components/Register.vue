@@ -5,11 +5,11 @@
     <div class="register-body">
       <div class="content">
         <h1 class="register-title">欢迎注册工大调查</h1>
-        <InputPack type="text" placeholder="设置用户名" class="mar-bom-small"></InputPack>
-        <InputPack type="password" placeholder="设置你的登录密码" class="mar-bom-small"></InputPack>
-        <InputPack type="password" placeholder="再次输入你的密码" class="mar-bom-small"></InputPack>
-        <InputPack type="text" placeholder="输入你的手机号码" class="mar-bom-small"></InputPack>
-        <ButtonPack>同意条款并注册</ButtonPack>
+        <InputPack @getValue="getUser" type="text" placeholder="设置用户名" class="mar-bom-small"></InputPack>
+        <InputPack @getValue="getPassWord" type="password" placeholder="设置你的登录密码" class="mar-bom-small"></InputPack>
+        <InputPack @getValue="getRePassWord" type="password" placeholder="再次输入你的密码" class="mar-bom-small"></InputPack>
+        <InputPack @getValue="getTel" type="text" placeholder="输入你的手机号码" class="mar-bom-small"></InputPack>
+        <ButtonPack @hit="register">同意条款并注册</ButtonPack>
       </div>
       <div class="tips">
         <span>
@@ -44,6 +44,12 @@ export default {
           href: ''
         }],
         style: 'register-head-list'
+      },
+      user: {
+        account: '',
+        password: '',
+        repassword: '',
+        tel: ''
       }
     }
   },
@@ -54,7 +60,35 @@ export default {
     ButtonPack
   },
   computed: {},
-  methods: {}
+  methods: {
+    getUser (value) {
+      this.user.account = value
+    },
+    getPassWord (value) {
+      this.user.password = value
+    },
+    getRePassWord (value) {
+      this.user.repassword = value
+    },
+    getTel (value) {
+      this.user.tel = value
+    },
+    /**
+     * 注册函数
+     */
+    register () {
+      this.$http.post('users/register', this.user)
+      .then(res => {
+        let result = res.data
+        if (result.status === 0) {
+          alert(result.errMessage)
+        } else {
+          // 显示登录成功-------------------------------
+          location.href = '/#/login'
+        }
+      })
+    }
+  }
 }
 </script>
 <style scoped>

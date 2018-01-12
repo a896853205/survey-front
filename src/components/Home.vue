@@ -1,18 +1,23 @@
 <template>
   <div>
     // home.vue
+    <Nav></Nav>
     <router-view/>
   </div>
 </template>
 
 <script>
+// 导航栏组件
+import Nav from './homeChild/Nav'
 export default {
   name: 'home',
   data () {
     return {
     }
   },
-  components: {},
+  components: {
+    Nav
+  },
   computed: {},
   methods: {},
       // 为每次跳页进行token判断
