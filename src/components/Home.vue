@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Head class="home-head" type="home-head-list"></Head>
     // home.vue
     <Nav></Nav>
     <router-view/>
@@ -9,6 +10,8 @@
 <script>
 // 导航栏组件
 import Nav from './homeChild/Nav'
+// 头部组件
+import Head from './head/Header'
 export default {
   name: 'home',
   data () {
@@ -16,7 +19,8 @@ export default {
     }
   },
   components: {
-    Nav
+    Nav,
+    Head
   },
   computed: {},
   methods: {},
@@ -38,4 +42,7 @@ export default {
 }
 </script>
 <style scoped>
+.home-head {
+  background: #373d41;
+}
 </style>

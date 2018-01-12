@@ -1,7 +1,7 @@
 <!-- UlPack.vue -->
 <template>
   <!-- 这里不能有回车,因为inline -->
-  <ul :class="listClass"><li v-for="item in linkList"><a :href="item.href">{{ item.name }}</a></li></ul>
+  <ul :class="listClass"><li :key="item.name" v-for="item in linkList"><a :href="item.href">{{ item.name }}</a></li></ul>
 </template>
 
 <script>
@@ -37,9 +37,7 @@ ul > li {
 .login-other-list > li {
   margin-left: 16px;
 }
-.login-other-list > li > a:link {
-  color: #73777A;
-}
+.login-other-list > li > a:link,
 .login-other-list > li > a:visited {
   color: #73777A;
 }
@@ -51,9 +49,7 @@ ul > li {
 .login-base-list > li {
   margin-right: 35px;
 }
-.login-base-list > li > a:link {
-  color: #9b9ea0;
-}
+.login-base-list > li > a:link,
 .login-base-list > li > a:visited {
   color: #9b9ea0;
 }
@@ -67,9 +63,7 @@ ul > li {
   font-size: 14px;
   line-height: 30px;
 }
-.login-foot-other-list > li > a:link {
-  color: #73777A;
-}
+.login-foot-other-list > li > a:link,
 .login-foot-other-list > li > a:visited {
   color: #73777A;
 }
@@ -78,14 +72,13 @@ ul > li {
 }
 /* login页脚other样式结束 */
 /* login页头部样式开始 */
-.login-head-list > li {
-  padding: 0 20px;
+.login-head-list > li > a {
+  padding: 23px 20px;
   font-size: 14px;
-  line-height: 60px;
+  line-height: 14px;
+  display: inline-block;
 }
-.login-head-list > li > a:link {
-  color: #fff;
-}
+.login-head-list > li > a:link,
 .login-head-list > li > a:visited {
   color: #fff;
 }
@@ -94,20 +87,35 @@ ul > li {
 }
 /* login页头部样式结束 */
 /* register页头部样式开始*/
-.register-head-list > li {
-  padding: 0 20px;
+.register-head-list > li > a {
+  padding: 23px 20px;
   font-size: 14px;
-  line-height: 60px;
+  line-height: 14px;
+  display: inline-block;
 }
-.register-head-list > li > a:link {
-  color: #373D41;
-}
+.register-head-list > li > a:link,
 .register-head-list > li > a:visited {
   color: #373D41;
 }
 .register-head-list > li > a:hover {
   color: #00C1DE;
 }
-
 /* register页头部样式结束*/
+/* home页头样式开始 */
+.home-head-list > li > a {
+  padding: 18px;
+  border-left: 1px solid #2a2f32;
+  line-height: 14px;
+  font-size: 14px;
+  display: inline-block;
+}
+.home-head-list > li > a:link,
+.home-head-list > li > a:visited {
+  background: #373d41;
+  color: #fff;
+}
+.home-head-list > li > a:hover{
+  background: #2a2f32;
+}
+/* home页头样式结束 */
 </style>
