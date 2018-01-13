@@ -1,5 +1,6 @@
 <template>
   <nav id='navQ' class='nav'>
+    <button @click="changeWidth" type="button" class="change-button">| | |</button>
     <ul>
       <li v-for="li in navData" 
           @click="isShowChild(li)" 
@@ -7,23 +8,26 @@
           :class="isShowChild ? 'active-li': ''"
           :key="li.liName">
         <a class="par-a">
-          <!-- 这里是主图标 -->
-          <!-- <i :class='li.faClass'></i> -->
-          {{li.liName}}
-          <!-- 这里是旋转90度的小角 -->
-          <!-- <i v-if='li.children.length != 0' 
+          <!-- 
+            主图标
+            想旋转加v-if='li.children.length != 0' 
             :style="{'transform': arrRotate(li)}" 
-            class='fa fa-angle-right'></i> -->
+            不想旋转就去掉
+          -->
+          <i v-if='li.children.length != 0' 
+            :style="{'transform': arrRotate(li)}" 
+            class='iconfont icon-more'></i>
+          <span :style="{'display': navUnflod ? 'inline' : 'none'}">{{li.liName}}</span>
         </a>
         <ul class='child-ul'>
           <li class='child-li' 
               v-for='childLi in li.children'
               :key="childLi.name">
-            <!-- 这里是子图标 -->
-            <!-- <i class='fa fa-circle-thin'></i> -->
             <a @click.stop 
                :href='childLi.liHref'>
-               {{childLi.liName}}
+              <!-- 这里是子图标 -->
+              <i class="iconfont" :class="childLi.iconClass"></i>
+              <span :style="{'display': navUnflod ? 'inline' : 'none'}">{{childLi.liName}}</span>
             </a>
           </li>
         </ul>
@@ -39,19 +43,22 @@ export default {
   name: 'navQ',
   data () {
     return {
+      navUnflod: 'true',
       navData: [
         {
           liName: '问卷基础服务',
           liHref: '',
-          faClass: 'fa fa-search',
+          iconClass: '',
           children: [
             {
               liName: '问卷统览',
-              liHref: ''
+              liHref: '',
+              iconClass: 'icon-viewlist'
             },
             {
               liName: '增加问卷',
-              liHref: '#/home/userShow'
+              liHref: '#/home/userShow',
+              iconClass: 'icon-edit'
             }
           ],
           isShowChild: false,
@@ -60,15 +67,17 @@ export default {
         {
           liName: '问卷回答与管理',
           liHref: '',
-          faClass: 'fa fa-calendar',
+          iconClass: '',
           children: [
             {
               liName: '回答总览',
-              liHref: '#/home/inGoodsShow'
+              liHref: '#/home/inGoodsShow',
+              iconClass: 'icon-text'
             },
             {
               liName: '图形分析',
-              liHref: '#/home/outGoodsShow'
+              liHref: '#/home/outGoodsShow',
+              iconClass: 'icon-data'
             }
           ],
           isShowChild: false,
@@ -77,15 +86,17 @@ export default {
         {
           liName: '个人设置',
           liHref: '',
-          faClass: 'fa fa-calendar',
+          iconClass: '',
           children: [
             {
               liName: '修改信息',
-              liHref: '#/home/inGoodsShow'
+              liHref: '#/home/inGoodsShow',
+              iconClass: 'icon-set'
             },
             {
               liName: '修改密码',
-              liHref: '#/home/outGoodsShow'
+              liHref: '#/home/outGoodsShow',
+              iconClass: 'icon-trade-assurance'
             }
           ],
           isShowChild: false,
@@ -129,6 +140,19 @@ export default {
       } else {
         return 'rotate(0deg)'
       }
+    },
+    /**
+     * 改变宽度
+     */
+    changeWidth () {
+      if (!this.navUnflod) {
+        setTimeout(() => {
+          this.navUnflod = !this.navUnflod
+        }, 200)
+      } else {
+        this.navUnflod = !this.navUnflod
+      }
+      this.$emit('change')
     }
   }
 }
@@ -143,6 +167,19 @@ export default {
   color: #eee;
   font-size: 12px;
   line-height: 12px;
+}
+.change-button {
+  height: 30px;  width: 100%;
+  border: 0;
+  background: #4A5064;
+  color: #aeb9c2;
+  text-align: center;
+  line-height: 30px;
+  transition: .2s;
+  cursor: pointer;
+}
+.change-button:hover {
+  color: #fff;
 }
 .nav li {
   transition: 0.3s;
@@ -165,13 +202,12 @@ export default {
   display: block;
   padding: 14px 0 14px 10px;
 }
-/* .nav li i {
+.nav li i {
   display: inline-block;
   width: 30px;
-  font-size: 20px;
   text-align: center;
   transition: 0.3s;
-} */
+}
 .child-ul li {
   position: relative;
 }

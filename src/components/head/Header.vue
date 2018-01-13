@@ -40,6 +40,10 @@ export default {
 }
 .web-logo {
   cursor: pointer;
+  transition: .5s;
+}
+.web-logo:hover {
+  transform: rotate(180deg);
 }
 /* 登录头部样式开始 */
 .login-head-list {
@@ -76,7 +80,7 @@ export default {
 .home-head-list .web-logo {
   height: 30px;
   padding: 10px 15px;
-  border-right: 1px solid #2a2f32;
+  /* border-right: 1px solid #2a2f32; */
 }
 .home-head-list .web-black-logo {
   display: none;

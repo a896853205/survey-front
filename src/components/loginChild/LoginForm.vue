@@ -13,24 +13,16 @@
       <span>其他方式登录:</span>
       <ul>
         <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wechat"></use>
-          </svg>
+          <i class="iconfont icon-wechat"></i>
         </li>
         <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-weibo"></use>
-          </svg>
+          <i class="iconfont icon-weibo"></i>
         </li>
         <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-qq"></use>
-          </svg>
+          <i class="iconfont icon-qq"></i>
         </li>
         <li>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-github"></use>
-          </svg>
+          <i class="iconfont icon-github"></i>
         </li>
       </ul>
     </div>
@@ -145,8 +137,6 @@ export default {
   cursor: pointer;
 } 
 /* 登录方式样式结束 */
-</style>
-<style>
 /* 其他选项开始 */
 .login-other {
   margin-top: 12px;
@@ -155,4 +145,21 @@ export default {
   overflow: hidden;
 }
 /* 其他选项结束 */
+/* 图标样式开始 */
+.icon-wechat {
+  color: #51C332;
+}
+.icon-weibo {
+  color: #D32024;
+}
+.icon-qq {
+  color: #4CAFE9;
+}
+.icon-github {
+  color: #46B980;
+}
+/* 图标样式结束 */
+</style>
+<style>
+
 </style>

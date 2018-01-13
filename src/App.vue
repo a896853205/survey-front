@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style>
-/* 基本配置 */
+/* 基本配置开始 */
 * {
   margin: 0;
   padding: 0;
@@ -22,6 +22,7 @@ ul, ol {
 a {
   text-decoration: none;
 }
+/* 基本配置结束 */
 /* 工具类 */
 .hidden {
   display: none;
