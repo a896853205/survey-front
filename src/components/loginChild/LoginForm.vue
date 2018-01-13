@@ -79,7 +79,7 @@ export default {
      * 登录函数
      */
     login () {
-      this.$http.post('users/login', this.user)
+      this.$http.post('/login', this.user)
       .then(res => {
         let result = res.data
         if (result.status === 1) {
@@ -159,7 +159,4 @@ export default {
   color: #46B980;
 }
 /* 图标样式结束 */
-</style>
-<style>
-
 </style>

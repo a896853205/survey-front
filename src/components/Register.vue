@@ -77,7 +77,7 @@ export default {
      * 注册函数
      */
     register () {
-      this.$http.post('users/register', this.user)
+      this.$http.post('/register', this.user)
       .then(res => {
         let result = res.data
         if (result.status === 0) {
