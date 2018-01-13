@@ -1,9 +1,9 @@
 <!-- Header.vue -->
 <template>
-  <div id="top" :class="type">
+  <div id="top" :class="listData.style">
     <img class="web-logo web-white-logo" src="../../assets/white-logo.png" alt="LOGO">
     <img class="web-logo web-black-logo" src="../../assets/black-logo.png" alt="LOGO">
-    <UlPack class="head" :listClass="topList.style" :linkList="topList.data"></UlPack>
+    <UlPack class="head" :listClass="listData.style" :linkList="listData.data"></UlPack>
   </div>
 </template>
 
@@ -11,20 +11,10 @@
 // 列表组件
 import UlPack from '../form/UlPack'
 export default {
-  props: ['type'],
+  props: ['listData'],
   name: 'top',
   data () {
     return {
-      topList: {
-        data: [{
-          name: '中国站',
-          href: ''
-        }, {
-          name: '首页',
-          href: ''
-        }],
-        style: this.type
-      }
     }
   },
   components: {

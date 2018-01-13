@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Head class="home-head" type="home-head-list"></Head>
+    <Head class="home-head" :listData="topList"></Head>
     <div class="home-nav" 
          :style="{'width':navShow.style.width}">
       <Nav @change="changeWidth"></Nav>
@@ -33,6 +33,16 @@ export default {
         style: {
           width: NavBigwidth
         }
+      },
+      topList: {
+        data: [{
+          name: '中国站',
+          href: ''
+        }, {
+          name: '首页',
+          href: '/#/home/index'
+        }],
+        style: 'home-head-list'
       }
     }
   },
@@ -66,12 +76,32 @@ export default {
     next(vm => {
       if (!vm.$http.defaults.headers.common['Authorization']) {
         if (localStorage.getItem('token')) {
-          vm.$http.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+          vm.$http.defaults.headers.common['Authorization'] = localStorage.getItem('token')         // 发送到后台解析token
+          // 进行后台判断看token还是否合法
+          vm.$http.post('/home/all/getToken').then(res => {
+            let result = res.data
+            if (result.statusObj.status === 1) {
+              // 判断如果成功的话
+              // 把返回的值存入VUEX
+              vm.$store.commit('getUser', result.user)
+            } else {
+              // 如果不成功返回login页,而且把所有的token清空
+              // 这里应该输出token超时--------------------------
+              vm.$http.defaults.headers.common['Authorization'] = ''
+              window.localStorage.clear()
+              next('/login')
+            }
+          }).catch(() => {
+            next('/login')
+          })
         } else {
           next('/login')
         }
       }
     })
+  },
+  created () {
+    // 区后台查询该权限的nav
   }
 }
 </script>

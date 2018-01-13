@@ -10,6 +10,8 @@ import Register from '@/components/Register'
 import Home from '@/components/Home'
 // 后台首页组件
 import HomeIndex from '@/components/homeChild/HomeIndex'
+// 后台问卷总览组件
+import HomeQuestionShow from '@/components/homeChild/HomeQuestionShow'
 Vue.use(Router)
 
 export default new Router({
@@ -34,6 +36,10 @@ export default new Router({
         path: '/home/index',
         name: 'homeindex',
         component: HomeIndex
+      }, {
+        path: '/home/questionShow',
+        name: 'homequestionshow',
+        component: HomeQuestionShow
       }]
     }
   ]

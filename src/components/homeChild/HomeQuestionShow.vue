@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  name: 'homequestionshow',
   data () {
     return {
     }

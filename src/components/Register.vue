@@ -1,7 +1,7 @@
 <!-- Register.vue -->
 <template>
   <div id="register">
-    <Head type="register-head-list"></Head>
+    <Head :listData="topList"></Head>
     <div class="register-body">
       <div class="content">
         <h1 class="register-title">欢迎注册工大调查</h1>

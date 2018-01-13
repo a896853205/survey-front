@@ -1,7 +1,7 @@
 <template>
   <div id="login">
     <div class="login-background">
-      <Head type="login-head-list"></Head>
+      <Head type="login-head-list" :listData="topList"></Head>
       <LoginBody class="login-body"></LoginBody>
     </div>
       <Foot></Foot>
@@ -20,6 +20,16 @@ export default {
   name: 'login',
   data () {
     return {
+      topList: {
+        data: [{
+          name: '中国站',
+          href: ''
+        }, {
+          name: '首页',
+          href: '/#/'
+        }],
+        style: 'login-head-list'
+      }
     }
   },
   components: {

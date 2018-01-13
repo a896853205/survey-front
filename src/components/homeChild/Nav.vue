@@ -52,7 +52,7 @@ export default {
           children: [
             {
               liName: '问卷统览',
-              liHref: '',
+              liHref: '/#/home/questionShow',
               iconClass: 'icon-viewlist'
             },
             {

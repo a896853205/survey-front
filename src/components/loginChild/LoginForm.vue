@@ -82,13 +82,15 @@ export default {
       this.$http.post('/login', this.user)
       .then(res => {
         let result = res.data
-        if (result.status === 1) {
+        if (result.statusObj.status === 1) {
           localStorage.setItem('token', result.token)
           this.$http.defaults.headers.common['Authorization'] = result.token
+          // 塞到store里
+          this.$store.commit('getUser', result.user)
           // 发出跳页申请
           location.href = '#/home/index'
         } else {
-          alert(result.errMessage)
+          alert(result.statusObj.errMessage)
         }
       })
       .catch((e) => {
