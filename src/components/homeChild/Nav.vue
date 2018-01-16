@@ -44,65 +44,7 @@ export default {
   data () {
     return {
       navUnflod: 'true',
-      navData: [
-        {
-          liName: '问卷基础服务',
-          liHref: '',
-          iconClass: '',
-          children: [
-            {
-              liName: '问卷统览',
-              liHref: '/#/home/questionShow',
-              iconClass: 'icon-viewlist'
-            },
-            {
-              liName: '增加问卷',
-              liHref: '/#/home/questionAdd',
-              iconClass: 'icon-edit'
-            }
-          ],
-          isShowChild: false,
-          maxHeight: maxHeight
-        },
-        {
-          liName: '问卷回答与管理',
-          liHref: '',
-          iconClass: '',
-          children: [
-            {
-              liName: '回答总览',
-              liHref: '/#/home/answerShow',
-              iconClass: 'icon-text'
-            },
-            {
-              liName: '图形分析',
-              liHref: '/#/home/answerAnalyze',
-              iconClass: 'icon-data'
-            }
-          ],
-          isShowChild: false,
-          maxHeight: maxHeight
-        },
-        {
-          liName: '个人设置',
-          liHref: '',
-          iconClass: '',
-          children: [
-            {
-              liName: '修改信息',
-              liHref: '/#/home/configInfo',
-              iconClass: 'icon-set'
-            },
-            {
-              liName: '修改密码',
-              liHref: '/#/home/configPassWord',
-              iconClass: 'icon-trade-assurance'
-            }
-          ],
-          isShowChild: false,
-          maxHeight: maxHeight
-        }
-      ]
+      navData: []
     }
   },
   methods: {
@@ -156,8 +98,23 @@ export default {
     }
   },
   // 创建时查询nav数据
-  created () {
-    // 使用vuex中的数据查询
+  beforeMount () {
+    // 区后台查询该权限的nav
+    this.$http.post('/home/all/getNav')
+    .then(res => {
+      // 回来加上样式数据,isShowChild,maxHeight
+      console.log(res)
+      // 判断状态
+      if (res.data.statusObj.status === 1) {
+        res.data.navData.forEach(value => {
+          value.isShowChild = false
+          value.maxHeight = maxHeight
+        })
+        this.navData = res.data.navData
+      } else {
+        alert('网络错误,未查到nav数据')
+      }
+    })
   }
 }
 </script>

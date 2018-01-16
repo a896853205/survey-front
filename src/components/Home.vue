@@ -66,20 +66,14 @@ export default {
         this.homeShow.style.left = NavSmallwidth
         this.navShow.style.width = NavSmallwidth
       }
-    }
-  },
-      // 为每次跳页进行token判断
-      // 判断请求头之中是否有token
-      // 如果没有去localStorage取
-      // 如果localStorage没有就去login
-  beforeRouteEnter (to, from, next) {
-    next(vm => {
-      console.log(1)
+    },
+    judgeToken (vm) {
       if (!vm.$http.defaults.headers.common['Authorization']) {
         if (localStorage.getItem('token')) {
           vm.$http.defaults.headers.common['Authorization'] = localStorage.getItem('token')         // 发送到后台解析token
           // 进行后台判断看token还是否合法
-          vm.$http.post('/home/all/getToken').then(res => {
+          vm.$http.post('/home/all/getToken')
+          .then(res => {
             let result = res.data
             if (result.statusObj.status === 1) {
               // 判断如果成功的话
@@ -90,20 +84,28 @@ export default {
               // 这里应该输出token超时--------------------------
               vm.$http.defaults.headers.common['Authorization'] = ''
               window.localStorage.clear()
-              next('/login')
+              location.href = '/#/login'
             }
           }).catch(() => {
-            next('/login')
+            location.href = '/#/login'
           })
         } else {
-          next('/login')
+          location.href = '/#/login'
         }
       }
+    }
+  },
+      // 为每次跳页进行token判断
+      // 判断请求头之中是否有token
+      // 如果没有去localStorage取
+      // 如果localStorage没有就去login
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.judgeToken(vm)
     })
   },
-  created () {
-    console.log(2)
-    // 区后台查询该权限的nav
+  beforeMount () {
+    this.judgeToken(this)
   }
 }
 </script>
