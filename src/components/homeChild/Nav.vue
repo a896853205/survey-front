@@ -57,7 +57,7 @@ export default {
             },
             {
               liName: '增加问卷',
-              liHref: '#/home/userShow',
+              liHref: '/#/home/questionAdd',
               iconClass: 'icon-edit'
             }
           ],
@@ -71,12 +71,12 @@ export default {
           children: [
             {
               liName: '回答总览',
-              liHref: '#/home/inGoodsShow',
+              liHref: '/#/home/answerShow',
               iconClass: 'icon-text'
             },
             {
               liName: '图形分析',
-              liHref: '#/home/outGoodsShow',
+              liHref: '/#/home/answerAnalyze',
               iconClass: 'icon-data'
             }
           ],
@@ -90,12 +90,12 @@ export default {
           children: [
             {
               liName: '修改信息',
-              liHref: '#/home/inGoodsShow',
+              liHref: '/#/home/configInfo',
               iconClass: 'icon-set'
             },
             {
               liName: '修改密码',
-              liHref: '#/home/outGoodsShow',
+              liHref: '/#/home/configPassWord',
               iconClass: 'icon-trade-assurance'
             }
           ],
@@ -154,6 +154,10 @@ export default {
       }
       this.$emit('change')
     }
+  },
+  // 创建时查询nav数据
+  created () {
+    // 使用vuex中的数据查询
   }
 }
 </script>

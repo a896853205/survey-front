@@ -74,6 +74,7 @@ export default {
       // 如果localStorage没有就去login
   beforeRouteEnter (to, from, next) {
     next(vm => {
+      console.log(1)
       if (!vm.$http.defaults.headers.common['Authorization']) {
         if (localStorage.getItem('token')) {
           vm.$http.defaults.headers.common['Authorization'] = localStorage.getItem('token')         // 发送到后台解析token
@@ -101,6 +102,7 @@ export default {
     })
   },
   created () {
+    console.log(2)
     // 区后台查询该权限的nav
   }
 }
