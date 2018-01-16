@@ -61,15 +61,27 @@ export default {
   },
   computed: {},
   methods: {
+    /**
+     * @param {String} value 获取的值
+     */
     getUser (value) {
       this.user.account = value
     },
+    /**
+     * @param {String} value 获取的值
+     */
     getPassWord (value) {
       this.user.password = value
     },
+    /**
+     * @param {String} value 获取的值
+     */
     getRePassWord (value) {
       this.user.repassword = value
     },
+    /**
+     * @param {String} value 获取的值
+     */
     getTel (value) {
       this.user.tel = value
     },

@@ -12,6 +12,11 @@ export default {
     }
   },
   watch: {
+    /**
+     * 监听input值
+     * @param {String} val 旧值
+     * @param {String} oldVal 新值
+     */
     inputValue (val, oldVal) {
       this.$emit('getValue', this.inputValue)
     }

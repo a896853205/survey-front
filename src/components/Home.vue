@@ -67,6 +67,10 @@ export default {
         this.navShow.style.width = NavSmallwidth
       }
     },
+    /**
+     * 判断当前浏览器中是否存在token
+     * @param {Object} vm vue实例指的是home
+     */
     judgeToken (vm) {
       if (!vm.$http.defaults.headers.common['Authorization']) {
         if (localStorage.getItem('token')) {
@@ -95,15 +99,23 @@ export default {
       }
     }
   },
-      // 为每次跳页进行token判断
-      // 判断请求头之中是否有token
-      // 如果没有去localStorage取
-      // 如果localStorage没有就去login
+  /**
+   * @param {Object} to 之前的router
+   * @param {Object} from 之后的router
+   * @param {Function} next 调用即可去到指定router
+   */
   beforeRouteEnter (to, from, next) {
+    // 为每次跳页进行token判断
+    // 判断请求头之中是否有token
+    // 如果没有去localStorage取
+    // 如果localStorage没有就去login
     next(vm => {
       vm.judgeToken(vm)
     })
   },
+  /**
+   * mount之前
+   */
   beforeMount () {
     this.judgeToken(this)
   }

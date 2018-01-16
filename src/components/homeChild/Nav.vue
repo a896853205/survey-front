@@ -50,8 +50,7 @@ export default {
   methods: {
     /**
      * 展示子菜单,使用max-height的方法
-     *
-     * @param activeLi
+     * @param {Object} activeLi 点击的li标签
      */
     isShowChild (activeLi) {
       if (activeLi.isShowChild) {
@@ -73,8 +72,8 @@ export default {
     },
     /**
      * 箭头旋转角度
-     * @param {object} activeLi 选中的li标签
-     * @returns {string} 旋转的角度rotate(90deg)|rotate(0deg)
+     * @param {Object} activeLi 选中的li标签
+     * @returns {String} 旋转的角度rotate(90deg)|rotate(0deg)
      */
     arrRotate (activeLi) {
       if (activeLi.isShowChild) {
@@ -97,7 +96,9 @@ export default {
       this.$emit('change')
     }
   },
-  // 创建时查询nav数据
+  /**
+   * 创建时查询nav数据
+   */
   beforeMount () {
     // 区后台查询该权限的nav
     this.$http.post('/home/all/getNav')
