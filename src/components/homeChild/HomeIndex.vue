@@ -1,9 +1,7 @@
 <!-- HomeIndex.vue -->
 <template>
   <div class="home-index">
-    <HomeItem widType="2">
-      第一块
-    </HomeItem>
+    <HomeItem widType="2"></HomeItem>
     <HomeItem widType="1"></HomeItem>
     <HomeItem widType="1"></HomeItem>
     <HomeItem widType="2"></HomeItem>
@@ -13,7 +11,6 @@
     <HomeItem widType="1"></HomeItem>
     <HomeItem widType="2"></HomeItem>
     <HomeItem widType="3"></HomeItem>
-
   </div>
 </template>
 

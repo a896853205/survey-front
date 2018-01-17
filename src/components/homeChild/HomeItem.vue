@@ -44,7 +44,7 @@ export default {
 }
 /* 2/3块 */
 .home-item-two {
-  width: 66.3%;
+  width: 66.25%;
 }
 /* 3/3块 */
 .home-item-three {
