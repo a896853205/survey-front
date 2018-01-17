@@ -6,7 +6,7 @@
       <Nav @change="changeWidth"></Nav>
     </div>
     <div class="home-show" 
-         :style="{'left':homeShow.style.left}">
+         :style="{'left':homeShow.style.left,'width':homeShow.style.width}">
       <router-view/>
     </div>
   </div>
@@ -26,7 +26,8 @@ export default {
       isunfold: true,
       homeShow: {
         style: {
-          left: NavBigwidth
+          left: NavBigwidth,
+          width: this.getShowWidth(NavBigwidth)
         }
       },
       navShow: {
@@ -53,6 +54,14 @@ export default {
   computed: {},
   methods: {
     /**
+     * 根据导航栏的宽度获取展示块的宽度
+     * @param {String} navWidth 导航栏宽度
+     * @returns {String} 展示块宽度
+     */
+    getShowWidth (navWidth) {
+      return 'calc(100% - ' + navWidth + ')'
+    },
+    /**
      * 改变Nav宽度
      */
     changeWidth () {
@@ -60,10 +69,12 @@ export default {
       if (this.isunfold) {
         // 如果展开的时候
         this.homeShow.style.left = NavBigwidth
+        this.homeShow.style.width = this.getShowWidth(NavBigwidth)
         this.navShow.style.width = NavBigwidth
       } else {
         // 如果缩紧的时候
         this.homeShow.style.left = NavSmallwidth
+        this.homeShow.style.width = this.getShowWidth(NavSmallwidth)
         this.navShow.style.width = NavSmallwidth
       }
     },
@@ -132,8 +143,13 @@ export default {
   transition: .2s;
 }
 .home-show {
+  height: calc(100% - 50px);
+  padding: 8px 1% 0;
+  background: #eaedf1;
   position: absolute;
   transition: .2s;
   left: 0;
+  box-sizing: border-box;
+  
 }
 </style>
