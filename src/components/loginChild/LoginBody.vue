@@ -15,7 +15,7 @@
 
 <script>
 // 登录表单
-import LoginForm from './LoginForm'
+import LoginForm from '@/components/loginChild/LoginForm'
 
 export default {
   data () {

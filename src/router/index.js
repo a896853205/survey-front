@@ -24,6 +24,9 @@ import HomeConfigInfo from '@/components/homeChild/config/HomeConfigInfo'
 import HomeConfigPassword from '@/components/homeChild/config/HomeConfigPassword'
 // 后台问卷增加选择类型组件
 import QuestionAddSelectType from '@/components/homeChild/question/questionAddChild/SelectType'
+// 后台问卷增加选择类型组件
+import QuestionAddAddTitle from '@/components/homeChild/question/questionAddChild/AddTitle'
+
 Vue.use(Router)
 
 export default new Router({
@@ -60,6 +63,10 @@ export default new Router({
           path: '/home/questionAdd/',
           name: 'selecttype',
           component: QuestionAddSelectType
+        }, {
+          path: '/home/quesstionAdd/AddTitle',
+          name: 'addtitle',
+          component: QuestionAddAddTitle
         }]
       }, {
         path: '/home/answerAnalyze',

@@ -1,10 +1,9 @@
 <template>
-  <input v-model="inputValue" :type="type" :placeholder="placeholder" class="input-pack">
+  <input v-model="inputValue" class="input-pack">
 </template>
 
 <script>
 export default {
-  props: ['placeholder', 'type'],
   name: 'inputPack',
   data () {
     return {
@@ -40,5 +39,12 @@ export default {
 }
 .input-pack:focus {
   box-shadow: 0 0 3px #ddd;
+}
+.input-pack[disabled] {
+  cursor: not-allowed;
+}
+.input-pack[disabled]:hover {
+  box-shadow: 0;
+  border:1px solid rgb(204, 204, 204);
 }
 </style>

@@ -11,9 +11,9 @@
 
 <script>
 // home单元组件
-import HomeItem from '../../HomeItem'
+import HomeItem from '@/components/homeChild/HomeItem'
 // item单元头
-import ItemHead from '../../item/ItemHead'
+import ItemHead from '@/components/homeChild/item/ItemHead'
 export default {
   name: 'processstatus',
   props: ['process'],

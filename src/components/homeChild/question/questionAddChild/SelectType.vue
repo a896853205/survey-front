@@ -15,13 +15,13 @@
 
 <script>
 // home单元组件
-import HomeItem from '../../HomeItem'
+import HomeItem from '@/components/homeChild/HomeItem'
 // item单元头
-import ItemHead from '../../item/ItemHead'
+import ItemHead from '@/components/homeChild/item/ItemHead'
 // item单元体
-import ItemBody from '../../item/ItemBody'
+import ItemBody from '@/components/homeChild/item/ItemBody'
 // type个别组件
-import TypeCell from './selectTypeChild/TypeCell'
+import TypeCell from '@/components/homeChild/question/questionAddChild/selectTypeChild/TypeCell'
 export default {
   name: 'selecttype',
   data () {
@@ -69,7 +69,11 @@ export default {
     TypeCell
   },
   computed: {},
-  methods: {}
+  methods: {
+  },
+  beforeMount () {
+    this.$store.commit('initProcess')
+  }
 }
 </script>
 <style scoped>

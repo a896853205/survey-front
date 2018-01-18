@@ -7,7 +7,12 @@
     <div class="type-cell-right">
       <h5>{{ typeData.title }}</h5>
       <p>{{ typeData.describe }}</p>
-      <button class="onsell-button" v-if="typeData.isSell" type="button">立即创建</button>
+      <button class="onsell-button"
+              v-if="typeData.isSell" 
+              type="button" 
+              @click="changeUrl('/#/home/quesstionAdd/AddTitle')">
+              立即创建
+      </button>
       <button class="sell-out-button" v-else>尽情期待</button>
     </div>
   </li>
@@ -23,7 +28,21 @@ export default {
   },
   components: {},
   computed: {},
-  methods: {}
+  methods: {
+    /**
+     * 发出下一步骤的请求
+     */
+    nextProcess () {
+      this.$store.commit('nextProcess')
+    },
+    /**
+     * 跳转页面
+     */
+    changeUrl (toUrl) {
+      this.nextProcess()
+      location.href = toUrl
+    }
+  }
 }
 </script>
 <style scoped>

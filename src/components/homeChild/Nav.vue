@@ -23,7 +23,7 @@
           <li class='child-li' 
               v-for='childLi in li.children'
               :key="childLi.name">
-            <a @click.stop 
+            <a @click.stop
                :href='childLi.liHref'>
               <!-- 这里是子图标 -->
               <i class="iconfont" :class="childLi.iconClass"></i>
@@ -157,7 +157,7 @@ export default {
   background: #232a2f;
 } */
 .nav a:link,
-.nav a:valid,
+.nav a:focus,
 .nav a:hover,
 .nav a:active,
 .nav a {

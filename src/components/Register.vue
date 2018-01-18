@@ -24,13 +24,13 @@
 
 <script>
 // 头组件
-import Head from './head/Header'
+import Head from '@/components/head/Header'
 // 底部组件
-import Foot from './foot/Footer'
+import Foot from '@/components/foot/Footer'
 // 输入框组件
-import InputPack from './form/InputPack'
+import InputPack from '@/components/form/InputPack'
 // 按钮组件
-import ButtonPack from './form/ButtonPack'
+import ButtonPack from '@/components/form/ButtonPack'
 export default {
   name: 'register',
   data () {

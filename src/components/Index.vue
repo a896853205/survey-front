@@ -13,13 +13,13 @@
 
 <script>
 // 头主件
-import IndexHead from './indexChild/IndexHeader'
+import IndexHead from '@/components/indexChild/IndexHeader'
 // 副-头主件
-import SubHead from './head/Sub-header'
+import SubHead from '@/components/head/Sub-header'
 // 幻灯片
-import Slide from './indexChild/Slide'
+import Slide from '@/components/indexChild/Slide'
 // 特性组件
-import Feature from './indexChild/Feature'
+import Feature from '@/components/indexChild/Feature'
 
 export default {
   name: 'index',

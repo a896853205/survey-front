@@ -12,7 +12,7 @@
 
 <script>
 // 列表组件
-import UlPack from '../form/UlPack'
+import UlPack from '@/components/form/UlPack'
 export default {
   props: ['type'],
   name: 'buttom',

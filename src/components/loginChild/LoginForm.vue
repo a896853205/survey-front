@@ -30,12 +30,12 @@
 </template>
 
 <script>
-// 输入框组件
-import InputPack from '../form/InputPack'
-// 按钮组件
-import ButtonPack from '../form/ButtonPack'
+// input组件
+import InputPack from '@/components/form/InputPack'
+// button组件
+import ButtonPack from '@/components/form/ButtonPack'
 // 列表组件
-import UlPack from '../form/UlPack'
+import UlPack from '@/components//form/UlPack'
 export default {
   name: 'loginform',
   data () {

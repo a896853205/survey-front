@@ -10,11 +10,11 @@
 
 <script>
 // 头组件
-import Head from './head/Header'
+import Head from '@/components/head/Header'
 // 登录组体(左文字,右登录框)
-import LoginBody from './loginChild/LoginBody'
+import LoginBody from '@/components/loginChild/LoginBody'
 // 底部组件
-import Foot from './foot/Footer'
+import Foot from '@/components/foot/Footer'
 
 export default {
   name: 'login',

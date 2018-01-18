@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import HomeItem from './HomeItem'
+import HomeItem from '@/components/homeChild/HomeItem'
 export default {
   name: 'homeindex',
   data () {

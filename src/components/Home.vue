@@ -14,9 +14,9 @@
 
 <script>
 // 导航栏组件
-import Nav from './homeChild/Nav'
+import Nav from '@/components/homeChild/Nav'
 // 头部组件
-import Head from './head/Header'
+import Head from '@/components/head/Header'
 const NavBigwidth = '180px'
 const NavSmallwidth = '50px'
 export default {
