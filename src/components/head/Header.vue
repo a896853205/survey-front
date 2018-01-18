@@ -69,7 +69,7 @@ export default {
 }
 .home-head-list .web-logo {
   height: 30px;
-  padding: 10px 15px;
+  margin: 10px 15px;
   /* border-right: 1px solid #2a2f32; */
 }
 .home-head-list .web-black-logo {

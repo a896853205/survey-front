@@ -22,7 +22,8 @@ import HomeAnswerShow from '@/components/homeChild/answer/HomeAnswerShow'
 import HomeConfigInfo from '@/components/homeChild/config/HomeConfigInfo'
 // 后台密码配置组件
 import HomeConfigPassword from '@/components/homeChild/config/HomeConfigPassword'
-
+// 后台问卷增加选择类型组件
+import QuestionAddSelectType from '@/components/homeChild/question/questionAddChild/SelectType'
 Vue.use(Router)
 
 export default new Router({
@@ -54,7 +55,12 @@ export default new Router({
       }, {
         path: '/home/questionAdd',
         name: 'homequestionadd',
-        component: HomeQuestionAdd
+        component: HomeQuestionAdd,
+        children: [{
+          path: '/home/questionAdd/',
+          name: 'selecttype',
+          component: QuestionAddSelectType
+        }]
       }, {
         path: '/home/answerAnalyze',
         name: 'homeansweranalyze',

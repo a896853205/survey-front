@@ -31,7 +31,6 @@ export default {
 </script>
 <style scoped>
 .home-item {
-  padding: 16px;
   margin: 8px 0;
   background: #fff;
   box-shadow: 0 1px 1px rgba(0,0,0,0.15);

@@ -132,6 +132,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .home-head {
   background: #373d41;
@@ -149,7 +150,6 @@ export default {
   position: absolute;
   transition: .2s;
   left: 0;
-  box-sizing: border-box;
-  
+  overflow: auto;
 }
 </style>

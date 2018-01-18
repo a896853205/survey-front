@@ -65,7 +65,7 @@ export default {
             item.maxHeight = maxHeight
           })
           // 一个是21px
-          activeLi.maxHeight = `${(activeLi.children.length + 1) * 42}px`
+          activeLi.maxHeight = `${(activeLi.children.length + 1) * parseInt(maxHeight)}px`
           activeLi.isShowChild = !activeLi.isShowChild
         }
       }
