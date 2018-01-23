@@ -22,10 +22,11 @@
             </div>
           </div>
           <div class="edit-menu">
-            <span @click="editQuestion(question)" class="iconfont icon-edit edit-icon"></span>
+            <span @click="editQuestion(questionIndex)" class="iconfont icon-edit edit-icon"></span>
             <span @click="deleteQuestion(questionIndex)" class="iconfont icon-delete"></span>
             <span ></span>
           </div>
+          <!-- <IssueEditBox></IssueEditBox> -->
           <div class="edit-outer-box" :class="{unedit: !question.isEdit}">
             <div class="edit-box">
               <div class="edit-first-row">
@@ -60,13 +61,13 @@
                                 :inputName="opation"></InputPack>
                     </div>
                     <div class="second-opation-detail">
-                      <span class="iconfont icon-delete"></span>
-                      <span class="iconfont icon-refresh"></span>
+                      <span @click="deleteOpation(questionIndex, index)" class="iconfont icon-delete"></span>
+                      <span @click="refreshOpation(questionIndex, index)" class="iconfont icon-refresh"></span>
                     </div>
                   </div>
                 </div>
               </div>
-              <ButtonPack>确定及保存</ButtonPack>
+              <ButtonPack @click.native="saveQuestion(questionIndex)">确定及保存</ButtonPack>
             </div>
           </div>
         </div>
@@ -86,102 +87,27 @@ import ItemBody from '@/components/homeChild/item/ItemBody'
 import InputPack from '@/components/form/InputPack'
 // button组件
 import ButtonPack from '@/components/form/ButtonPack'
+// 问卷编辑设置盒子组件
+import IssueEditBox from '@/components/homeChild/question/questionAddChild/addIssueChild/issueFormChild/IssueEditBox'
 
 export default {
   name: 'addissueform',
   data () {
-    return {
-      questionData: [{
-        name: '问题1?',
-        opationData: [{
-          name: '选项1',
-          value: '选项1',
-          isActive: false
-        }, {
-          name: '选项2',
-          value: '选项2',
-          isActive: false
-        }, {
-          name: '选项3',
-          value: '选项3',
-          isActive: false
-        }, {
-          name: '选项4',
-          value: '选项4',
-          isActive: false
-        }],
-        isEdit: false
-      }, {
-        name: '问题1?',
-        opationData: [{
-          name: '选项1',
-          value: '选项1',
-          isActive: false
-        }, {
-          name: '选项2',
-          value: '选项2',
-          isActive: false
-        }, {
-          name: '选项3',
-          value: '选项3',
-          isActive: false
-        }, {
-          name: '选项4',
-          value: '选项4',
-          isActive: false
-        }],
-        isEdit: false
-      }, {
-        name: '问题1?',
-        opationData: [{
-          name: '选项1',
-          value: '选项1',
-          isActive: false
-        }, {
-          name: '选项2',
-          value: '选项2',
-          isActive: false
-        }, {
-          name: '选项3',
-          value: '选项3',
-          isActive: false
-        }, {
-          name: '选项4',
-          value: '选项4',
-          isActive: false
-        }],
-        isEdit: false
-      }, {
-        name: '问题1?',
-        opationData: [{
-          name: '选项1',
-          value: '选项1',
-          isActive: false
-        }, {
-          name: '选项2',
-          value: '选项2',
-          isActive: false
-        }, {
-          name: '选项3',
-          value: '选项3',
-          isActive: false
-        }, {
-          name: '选项4',
-          value: '选项4',
-          isActive: false
-        }],
-        isEdit: false
-      }]
-    }
+    return {}
   },
   components: {
     HomeItem,
     ItemHead,
     ItemBody,
     InputPack,
-    ButtonPack
+    ButtonPack,
+    IssueEditBox
   },
-  computed: {},
+  computed: {
+    questionData () {
+      return this.$store.state.inquiryEdit.questionData
+    }
+  },
   methods: {
     /**
      * 点击选项事件
@@ -196,18 +122,17 @@ export default {
     },
     /**
      * 开启编辑问题
-     * @param {Object} question 开始编辑的题目
+     * @param {number} questionIndex 开始编辑的题目系数
      */
-    editQuestion (question) {
-      question.isEdit = true
+    editQuestion (questionIndex) {
+      this.$store.commit('editQuestion', questionIndex)
     },
     /**
      * 删除的当前问题
      * @param {number} questionIndex 问卷的系数
      */
     deleteQuestion (questionIndex) {
-      console.log(questionIndex)
-      this.questionData.splice(questionIndex, 1)
+      this.$store.commit('deleteQuestion', questionIndex)
     },
     /**
      * 题目上移
@@ -215,12 +140,10 @@ export default {
      */
     questionUp (questionIndex) {
       if (questionIndex === 0) {
+        // 这里以后更改成好看的alert ------------------
         alert('第一题不能上移啦')
       } else {
-        // 与上题交换
-        let temp = this.questionData[questionIndex]
-        this.$set(this.questionData, questionIndex, this.questionData[questionIndex - 1])
-        this.$set(this.questionData, questionIndex - 1, temp)
+        this.$store.commit('questionUp', questionIndex)
       }
     },
     /**
@@ -229,12 +152,10 @@ export default {
      */
     questionDown (questionIndex) {
       if (questionIndex === this.questionData.length - 1) {
+        // 这里以后更改成好看的alert ------------------
         alert('最后一题不能下移啦')
       } else {
-        // 与下题交换
-        let temp = this.questionData[questionIndex]
-        this.$set(this.questionData, questionIndex, this.questionData[questionIndex + 1])
-        this.$set(this.questionData, questionIndex + 1, temp)
+        this.$store.commit('questionDown', questionIndex)
       }
     },
     /**
@@ -242,11 +163,32 @@ export default {
      * @param {number} questionIndex 问卷系数
      */
     addOpation (questionIndex) {
-      this.questionData[questionIndex].opationData.push({
-        name: '新建的选项',
-        value: '新建的选项',
-        isActive: false
-      })
+      this.$store.commit('addOpation', questionIndex)
+    },
+    /**
+     * 删除选中选项
+     * @param {number} questionIndex 问卷系数
+     * @param {number} opationIndex 选项系数
+     */
+    deleteOpation (questionIndex, opationIndex) {
+      this.$store.commit('deleteOpation', questionIndex, opationIndex)
+    },
+    /**
+     * 删除选中选项内容
+     * @param {number} questionIndex 问卷系数
+     * @param {number} opationIndex 选项系数
+     */
+    refreshOpation (questionIndex, opationIndex) {
+      this.$store.commit('refreshOpation', questionIndex, opationIndex)
+    },
+    /**
+     * 保存问题
+     * @param {number} questionIndex 点击保存所在的问题系数
+     */
+    saveQuestion (questionIndex) {
+      // 这里提交(把整个数组提交)---进入换冲
+      // 提交成功后关闭运行下面代码 ------------------------
+      this.$store.commit('closeEdit', questionIndex)
     },
     /**
      * input获取值
@@ -352,7 +294,7 @@ export default {
   margin-right: -60px;
   margin-top: 10px;
   max-height: 500px;
-  overflow: hidden;
+  overflow: auto;
   transition: .2s;
   border-left: 2px dotted #fff;
   border-right: 2px dotted #fff;
@@ -466,6 +408,5 @@ export default {
   }
   /* 编辑框内部结构结束 */
 /* 问卷体结束 */
-/* 编辑盒子 */
 
 </style>
