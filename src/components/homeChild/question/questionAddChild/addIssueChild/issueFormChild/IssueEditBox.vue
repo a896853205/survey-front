@@ -40,19 +40,26 @@
           </div>
         </div>
       </div>
-      <ButtonPack @click.native="saveQuestion(question)">确定及保存</ButtonPack>
+      <ButtonPack @click.native="saveQuestion(questionIndex)">确定及保存</ButtonPack>
     </div>
   </div>
 </template>
 
 <script>
-
+// input组件
+import InputPack from '@/components/form/InputPack'
+// button组件
+import ButtonPack from '@/components/form/ButtonPack'
 export default {
+  props: ['question', 'questionIndex', 'questionData'],
   data () {
     return {
     }
   },
-  components: {},
+  components: {
+    InputPack,
+    ButtonPack
+  },
   computed: {},
   methods: {
     /**
@@ -61,12 +68,10 @@ export default {
      */
     questionUp (questionIndex) {
       if (questionIndex === 0) {
+        // 这里以后更改成好看的alert ------------------
         alert('第一题不能上移啦')
       } else {
-        // 与上题交换
-        let temp = this.questionData[questionIndex]
-        this.$set(this.questionData, questionIndex, this.questionData[questionIndex - 1])
-        this.$set(this.questionData, questionIndex - 1, temp)
+        this.$store.commit('questionUp', questionIndex)
       }
     },
     /**
@@ -75,12 +80,10 @@ export default {
      */
     questionDown (questionIndex) {
       if (questionIndex === this.questionData.length - 1) {
+        // 这里以后更改成好看的alert ------------------
         alert('最后一题不能下移啦')
       } else {
-        // 与下题交换
-        let temp = this.questionData[questionIndex]
-        this.$set(this.questionData, questionIndex, this.questionData[questionIndex + 1])
-        this.$set(this.questionData, questionIndex + 1, temp)
+        this.$store.commit('questionDown', questionIndex)
       }
     },
     /**
@@ -88,11 +91,7 @@ export default {
      * @param {number} questionIndex 问卷系数
      */
     addOpation (questionIndex) {
-      this.questionData[questionIndex].opationData.push({
-        name: '新建选项',
-        value: '新建选项',
-        isActive: false
-      })
+      this.$store.commit('addOpation', questionIndex)
     },
     /**
      * 删除选中选项
@@ -100,24 +99,28 @@ export default {
      * @param {number} opationIndex 选项系数
      */
     deleteOpation (questionIndex, opationIndex) {
-      this.questionData[questionIndex].opationData.splice(opationIndex, 1)
+      this.$store.commit('deleteOpation',
+        {
+          questionIndex,
+          opationIndex
+        })
     },
     /**
-     * 删除选中选项
+     * 清空选中选项内容
      * @param {number} questionIndex 问卷系数
      * @param {number} opationIndex 选项系数
      */
     refreshOpation (questionIndex, opationIndex) {
-      this.$set(this.questionData[questionIndex].opationData, opationIndex, '')
+      this.$store.commit('refreshOpation', {questionIndex, opationIndex})
     },
     /**
      * 保存问题
-     * @param {Object} question 点击保存所在的问题
+     * @param {number} questionIndex 点击保存所在的问题系数
      */
-    saveQuestion (question) {
+    saveQuestion (questionIndex) {
       // 这里提交(把整个数组提交)---进入换冲
       // 提交成功后关闭运行下面代码 ------------------------
-      question.isEdit = false
+      this.$store.commit('closeEdit', questionIndex)
     },
     /**
      * input获取值
@@ -129,6 +132,26 @@ export default {
 }
 </script>
 <style scoped>
+.edit-outer-box {
+  margin-left: -60px;
+  margin-right: -60px;
+  margin-top: 10px;
+  max-height: 500px;
+  overflow: auto;
+  transition: .2s;
+  border-left: 2px dotted #fff;
+  border-right: 2px dotted #fff;
+  z-index: 2;
+}
+.unedit {
+  max-height: 0;
+}
+.edit-box {
+  padding: 10px;
+  background: #fff;
+  display: flex;
+  flex-wrap: wrap;
+}
 /* 编辑框内部结构开始 */
 .edit-first-row {
   width: 100%;

@@ -29,6 +29,18 @@ export default {
   },
   mutations: {
     /**
+     * 点击选项事件
+     * @param {Object} state 状态
+     * @param {number} questionIndex 选中选项的题目系数
+     * @param {number} opationIndex 选中的选项系数
+     */
+    activeOpation (state, {questionIndex, opationIndex}) {
+      state.questionData[questionIndex].opationData.forEach(value => {
+        value.isActive = false
+      })
+      state.questionData[questionIndex].opationData[opationIndex].isActive = true
+    },
+    /**
      * 基本状态设置
      * @param {Object} state 状态
      * @param {Array} questionData 问题的数组
@@ -92,16 +104,16 @@ export default {
      * @param {number} questionIndex 问卷系数
      * @param {number} opationIndex 选项系数
      */
-    deleteOpation (state, questionIndex, opationIndex) {
+    deleteOpation (state, {questionIndex, opationIndex}) {
       state.questionData[questionIndex].opationData.splice(opationIndex, 1)
     },
     /**
-     * 删除选中选项
+     * 清空选中选项
      * @param {Object} state 状态
      * @param {number} questionIndex 问卷系数
      * @param {number} opationIndex 选项系数
      */
-    refreshOpation (state, questionIndex, opationIndex) {
+    refreshOpation (state, {questionIndex, opationIndex}) {
       state.questionData[questionIndex].opationData.splice(opationIndex, 1, '')
     },
     /**
