@@ -1,11 +1,21 @@
 <!-- AddIssueForm.vue -->
 <template>
-  <HomeItem widType="2">
+  <HomeItem widType="3">
     <ItemHead>问卷编辑区</ItemHead>
     <ItemBody>
-      <h2 class="issue-title">测试问卷1</h2>
-      <p class="issue-describe">问卷描述</p>
-      <IssueEdit></IssueEdit>   
+      <h2 class="issue-title">
+        {{inquiryData.name}}
+        <span class="inquiry-score">
+          总分数(
+            <span class="inquiry-score-max">{{inquiryData.maxScore}}</span>
+          )
+        </span>
+      </h2>
+      <p class="issue-describe">{{inquiryData.describe}}</p>
+      <IssueEdit :inquiryData="inquiryData"></IssueEdit>
+      <div class="save-inquiry-button">
+        <ButtonPack>保存问卷</ButtonPack>
+      </div>
     </ItemBody>
   </HomeItem>
 </template>
@@ -19,7 +29,8 @@ import ItemHead from '@/components/homeChild/item/ItemHead'
 import ItemBody from '@/components/homeChild/item/ItemBody'
 // 问卷编辑设置组件
 import IssueEdit from '@/components/homeChild/question/questionAddChild/addIssueChild/issueFormChild/IssueEdit'
-
+// button组件
+import ButtonPack from '@/components/form/ButtonPack'
 export default {
   name: 'addissueform',
   data () {
@@ -29,9 +40,13 @@ export default {
     HomeItem,
     ItemHead,
     ItemBody,
-    IssueEdit
+    IssueEdit,
+    ButtonPack
   },
   computed: {
+    inquiryData () {
+      return this.$store.state.inquiryEdit.inquiryData
+    }
   },
   methods: {}
 }
@@ -41,7 +56,7 @@ export default {
 .issue-title {
   margin-bottom: 10px;
   text-align: center;
-  color: #28B5D6;
+  color: #42485B;
   font-weight: 400;
 }
 .issue-describe {
@@ -50,5 +65,15 @@ export default {
   color: #666;
   margin-bottom: 15px;
 }
+.save-inquiry-button {
+  width: 80%;
+  margin: 0 auto;
+}
 /* 问卷头结束 */
+.inquiry-score {
+  margin-left: 20px;
+}
+.inquiry-score-max {
+  color: red;
+}
 </style>

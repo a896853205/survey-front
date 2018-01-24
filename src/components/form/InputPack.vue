@@ -33,7 +33,6 @@ export default {
   border: 1px solid #ccc;
   color: #595959;
   line-height: 40px;
-  box-sizing: border-box;
 }
 .input-pack:hover {
   border-color: #00C1DE;

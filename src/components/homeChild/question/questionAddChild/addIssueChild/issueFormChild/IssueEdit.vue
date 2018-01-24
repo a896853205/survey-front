@@ -4,9 +4,16 @@
     <!-- 问题编辑组件 -->
     <div :key="questionIndex"
           class="issue-item"
-          v-for="(question, questionIndex) in questionData">
+          v-for="(question, questionIndex) in inquiryData.questionData">
       <span class="issue-number">{{questionIndex + 1}}</span>
-      <h5>{{question.name}}</h5>
+      <h5>
+        {{question.name}}
+        <span class="score-span">
+           此题满分为(
+            <span class="max-score-span">{{question.maxScore}}</span>
+           )
+        </span>
+      </h5>
       <div class="issue-opation-body">
         <div :key="index"
             v-for="(opation, index) in question.opationData" 
@@ -20,7 +27,7 @@
       <IssueEditMenu :questionIndex="questionIndex"></IssueEditMenu>
       <IssueEditBox :question="question"
                     :questionIndex="questionIndex"
-                    :questionData="questionData"></IssueEditBox>
+                    :questionData="inquiryData.questionData"></IssueEditBox>
     </div>
   </div>
 </template>
@@ -31,6 +38,7 @@ import IssueEditBox from '@/components/homeChild/question/questionAddChild/addIs
 // 问卷编辑设置菜单组件
 import IssueEditMenu from '@/components/homeChild/question/questionAddChild/addIssueChild/issueFormChild/IssueEditMenu'
 export default {
+  props: ['inquiryData'],
   name: 'issueedit',
   data () {
     return {
@@ -41,9 +49,6 @@ export default {
     IssueEditMenu
   },
   computed: {
-    questionData () {
-      return this.$store.state.inquiryEdit.questionData
-    }
   },
   methods: {
     /**
@@ -67,8 +72,10 @@ export default {
   width: 80%;
   margin: 0 auto;
   padding: 20px 60px;
-  background: #EAEDF1;
+  padding-bottom: 0;
+  background: #F5F5F6;
   font-size: 14px;
+  color: #666666;
 }
 .issue-right-body h5 {
   width: 100%;
@@ -85,7 +92,7 @@ export default {
   justify-content: space-between;
 }
 .issue-item {
-  margin-top: 40px;
+  margin-top: 20px;
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -125,7 +132,7 @@ export default {
   line-height: 25px;
   position: absolute;
   left: -40px;
-  color: #333;
+  color: #666666;
 }
 .iconfont {
   font-size: 13.5px;
@@ -135,5 +142,11 @@ export default {
   color: #fff;
   background: #61C9E5;
   border: 1px solid #61C9E5;
+}
+.score-span {
+  margin-left: 15px;
+}
+.max-score-span {
+  color: red;
 }
 </style>

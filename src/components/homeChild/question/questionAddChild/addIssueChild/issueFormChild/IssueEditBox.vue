@@ -18,7 +18,8 @@
           <span @click="addOpation(questionIndex)" class="iconfont icon-add" title="增加选项"></span>
         </div>
       </div>
-      <hr class="edit-hr">
+      <!-- 中间的线 -->
+      <!-- <hr class="edit-hr"> -->
       <div class="edit-second-row">
         <span class="second-title">
           选项:
@@ -28,19 +29,27 @@
                 :key="index"
                 v-for="(opation, index) in question.opationData">
             <div class="second-opation-input">
-              <InputPack  type="text"
+              <InputPack type="text"
                         @getValue="getValue"
                         :value="opation.name"
                         :inputName="opation"></InputPack>
             </div>
             <div class="second-opation-detail">
+              <InputPack type="text"
+                         @getValue="setScore"
+                         :value="opation.score"
+                         :inputName="{questionIndex, index}"
+                         ></InputPack>
               <span @click="deleteOpation(questionIndex, index)" class="iconfont icon-delete"></span>
               <span @click="refreshOpation(questionIndex, index)" class="iconfont icon-refresh"></span>
             </div>
           </div>
         </div>
       </div>
-      <ButtonPack @click.native="saveQuestion(questionIndex)">确定及保存</ButtonPack>
+      <div class="save-button">
+        <ButtonPack class="save-question-button" @click.native="saveQuestion(questionIndex)">确定及保存</ButtonPack>
+        <ButtonPack class="add-question-button" @click.native="addQuestion(questionIndex)">增加问题</ButtonPack>
+      </div>
     </div>
   </div>
 </template>
@@ -123,7 +132,25 @@ export default {
       this.$store.commit('closeEdit', questionIndex)
     },
     /**
-     * input获取值
+     * 在index后增加问题
+     * @param {number} questionIndex 问题系数
+     */
+    addQuestion (questionIndex) {
+      this.$store.commit('addQuestion', questionIndex)
+    },
+    /**
+     * 修改自己的分数
+     * @param {number} value 分数
+     * @param {Object} opation 修改分数的选项
+     */
+    setScore (value, {questionIndex, index}) {
+      this.$store.commit('changeScore', {
+        questionIndex,
+        opationIndex: index,
+        value})
+    },
+    /**
+     * input获取值---------------------------修改
      */
     getValue (value, opation) {
       opation.name = value
@@ -133,6 +160,7 @@ export default {
 </script>
 <style scoped>
 .edit-outer-box {
+  flex-grow: 1;
   margin-left: -60px;
   margin-right: -60px;
   margin-top: 10px;
@@ -144,9 +172,10 @@ export default {
   z-index: 2;
 }
 .unedit {
-  max-height: 0;
+  max-height: 10px;
 }
 .edit-box {
+  width: 100%;
   padding: 10px;
   background: #fff;
   display: flex;
@@ -214,6 +243,9 @@ export default {
   display: flex;
   justify-content: space-around;
 }
+.second-opation-detail input {
+  width: 33.333333333333333333333333%;
+}
 .second-opation-detail span {
   line-height: 40px;
 }
@@ -228,5 +260,36 @@ span.iconfont:hover {
 span.icon-delete:hover {
   color: red;
 }
+/* 按钮组开始 */
+.save-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.save-button button {
+  width: 25%;
+  font-weight: 300;
+}
+.save-button button:hover {
+  font-weight: 300;
+}
+/* 保存按钮开始 */
+.save-button .save-question-button {
+  background: #42485B;
+}
+.save-button .save-question-button:hover {
+  background: rgb(59, 64, 82);
+}
+/* 保存按钮结束 */
+/* 增加问题按钮开始 */
+.save-button .add-question-button{
+  background: #F5F5F6;
+  color: #666666;
+}
+.save-button .add-question-button:hover {
+  background: rgb(237, 237, 238);
+}
+/* 增加问题按钮结束 */
+/* 按钮组结束 */
 /* 编辑框内部结构结束 */
 </style>
