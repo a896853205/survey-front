@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  props: ['questionIndex'],
+  props: ['questionIndex', 'questionData'],
   name: 'issueeditmenu',
   data () {
     return {
@@ -29,7 +29,11 @@ export default {
      * @param {number} questionIndex 问卷的系数
      */
     deleteQuestion (questionIndex) {
-      this.$store.commit('deleteQuestion', questionIndex)
+      if (this.questionData.length === 1) {
+        alert('问卷至少有一道题')
+      } else {
+        this.$store.commit('deleteQuestion', questionIndex)
+      }
     }
   }
 }

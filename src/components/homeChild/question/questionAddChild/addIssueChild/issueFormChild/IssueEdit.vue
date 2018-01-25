@@ -24,7 +24,8 @@
           <span class="opation-describe">{{opation.name}}</span>
         </div>
       </div>
-      <IssueEditMenu :questionIndex="questionIndex"></IssueEditMenu>
+      <IssueEditMenu :questionIndex="questionIndex"
+                     :questionData="inquiryData.questionData"></IssueEditMenu>
       <IssueEditBox :question="question"
                     :questionIndex="questionIndex"
                     :questionData="inquiryData.questionData"></IssueEditBox>
@@ -85,7 +86,8 @@ export default {
   flex-shrink: 0;
 }
 .issue-opation-body {
-  width: 100%;
+  /* 最小高度是为了不挡住编辑box */
+  width: 100%; min-height: 20px;
   display: flex;
   flex-shrink: 0;
   flex-wrap: wrap;

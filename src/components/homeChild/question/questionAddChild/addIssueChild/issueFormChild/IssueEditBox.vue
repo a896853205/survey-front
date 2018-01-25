@@ -7,10 +7,10 @@
           题目:
         </span>
         <div class="first-input">
-          <inputPack @getValue="getValue" 
+          <inputPack @getValue="setTitle" 
                     type="text"
                     :value="question.name"
-                    :inputName="question"></inputPack>
+                    :inputName="questionIndex"></inputPack>
         </div>
         <div class="first-opation">
           <span @click="questionUp(questionIndex)" class="iconfont icon-less" title="题目上移"></span>
@@ -30,9 +30,9 @@
                 v-for="(opation, index) in question.opationData">
             <div class="second-opation-input">
               <InputPack type="text"
-                        @getValue="getValue"
+                        @getValue="setOpation"
                         :value="opation.name"
-                        :inputName="opation"></InputPack>
+                        :inputName="{questionIndex, index}"></InputPack>
             </div>
             <div class="second-opation-detail">
               <div class="input-group">
@@ -150,13 +150,32 @@ export default {
       this.$store.commit('changeScore', {
         questionIndex,
         opationIndex: index,
-        value})
+        value
+      })
     },
     /**
-     * input获取值---------------------------修改
+     * 设置问题标题
+     * @param {Stirng} value 问卷的标题
+     * @param {number} questionIndex 问卷的系数
      */
-    getValue (value, opation) {
-      opation.name = value
+    setTitle (value, questionIndex) {
+      this.$store.commit('setQuestionTitle', {
+        questionIndex,
+        value
+      })
+    },
+    /**
+     * 设置问卷选项
+     * @param {String} value 问卷选项
+     * @param {number} questionIndex 问题系数
+     * @param {number} opationIndex 选项系数
+     */
+    setOpation (value, {questionIndex, index}) {
+      this.$store.commit('setOpationTitle', {
+        questionIndex,
+        opationIndex: index,
+        value
+      })
     }
   }
 }
