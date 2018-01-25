@@ -18,7 +18,7 @@ export default {
           score: 2
         }],
         isEdit: false,
-        maxScore: 3
+        maxScore: 2
       }, {
         name: '问题2?',
         opationData: [{
@@ -33,9 +33,9 @@ export default {
           score: 4
         }],
         isEdit: false,
-        maxScore: 7
+        maxScore: 4
       }],
-      maxScore: 10
+      maxScore: 7
     }
   },
   mutations: {
@@ -182,11 +182,13 @@ export default {
      * @param {Object} state 状态
      */
     changeQuestionScore (state, questionIndex) {
-      let totalScore = 0
+      let maxScore = 0
       state.inquiryData.questionData[questionIndex].opationData.forEach(item => {
-        totalScore = totalScore + parseInt(item.score)
+        if (item.score > maxScore) {
+          maxScore = item.score
+        }
       })
-      state.inquiryData.questionData[questionIndex].maxScore = totalScore
+      state.inquiryData.questionData[questionIndex].maxScore = maxScore
       // 调用修改问卷修改分数
       this.commit('changeInquiryScore')
     },

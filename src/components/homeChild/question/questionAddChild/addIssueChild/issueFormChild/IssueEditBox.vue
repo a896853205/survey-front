@@ -35,11 +35,14 @@
                         :inputName="opation"></InputPack>
             </div>
             <div class="second-opation-detail">
-              <InputPack type="text"
+              <div class="input-group">
+                <InputPack type="text"
                          @getValue="setScore"
                          :value="opation.score"
                          :inputName="{questionIndex, index}"
                          ></InputPack>
+                <span>分</span>
+              </div>
               <span @click="deleteOpation(questionIndex, index)" class="iconfont icon-delete"></span>
               <span @click="refreshOpation(questionIndex, index)" class="iconfont icon-refresh"></span>
             </div>
@@ -243,8 +246,18 @@ export default {
   display: flex;
   justify-content: space-around;
 }
-.second-opation-detail input {
-  width: 33.333333333333333333333333%;
+.input-group {
+  display: flex;
+}
+.input-group input {
+  width: 80%;
+}
+.input-group span {
+  width: 20%;
+  border: 1px solid #CCCCCC;
+  border-left: 0;
+  background: #F5F5F6;
+  text-align: center;
 }
 .second-opation-detail span {
   line-height: 40px;
