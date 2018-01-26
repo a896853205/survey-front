@@ -68,7 +68,7 @@ export default {
       this.$http.post('/home/manager/addInquiry',
         formData)
       .then(res => {
-        location.href = `/#/home/questionAdd/AddIssue/${res.data.questionId}`
+        location.href = `/#/home/questionAdd/AddIssue/${res.data.inquiryId}`
       })
       .catch(e => {
         alert('网络错误,请稍后再试')

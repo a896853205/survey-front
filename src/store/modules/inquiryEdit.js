@@ -1,3 +1,4 @@
+let axios = require('axios')
 // 编辑问卷变量储存
 export default {
   state: {
@@ -129,22 +130,43 @@ export default {
      * @param {Object} state 状态
      * @param {Array} inquiryData 问卷信息
      */
-    setInquiry (state, inquiryData) {
-      let opation1 = new Opation('新建选项1', '新建选项1', false, 0)
-      let opation2 = new Opation('新建选项2', '新建选项2', false, 0)
-      let question = new Question('新建问题', false)
-      question.setOpation(opation1)
-      question.setOpation(opation2)
-      let inquiry = new Inquiry('新建问卷', '新建问卷的描述')
-      inquiry.setQuestion(question)
-      // 这里查数据库应该修改-------------------
+    setInquiry (state, {inquiryData, questionData, opationData}) {
+      let inquiry = new Inquiry(inquiryData.title, inquiryData.description)
+      questionData.forEach(questionItem => {
+        // 新建问题
+        let tempQuestion = new Question(questionItem.content, false)
+        opationData.forEach(opationItem => {
+          // 添加该问题的选项
+          if (questionItem.id === opationItem.question_id) {
+            tempQuestion.setOpation(new Opation(opationItem.content, opationItem.content, false, opationItem.score))
+          }
+        })
+        inquiry.setQuestion(tempQuestion)
+      })
       state.inquiryData = inquiry
     }
   },
   actions: {
-    getInquiry () {
+    getInquiry (state, inquiryId) {
       // 查询数据库数据然后commit-------------------
-      this.commit('setInquiry')
+      axios.post('/home/manager/selectInquiry', {
+        inquiryId
+      })
+      .then(res => {
+        let result = res.data
+        if (result.statusObj.status === 1) {
+          console.log(result)
+          this.commit('setInquiry', {
+            inquiryData: result.inquiryInfo,
+            questionData: result.questionInfo,
+            opationData: result.opationInfo})
+        } else {
+          alert('未查到问卷信息')
+        }
+      })
+      .catch(e => {
+        console.log(e)
+      })
     }
   }
 }

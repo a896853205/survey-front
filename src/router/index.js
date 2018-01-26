@@ -70,7 +70,7 @@ export default new Router({
           name: 'addtitle',
           component: QuestionAddAddTitle
         }, {
-          path: '/home/questionAdd/AddIssue/:questionId',
+          path: '/home/questionAdd/AddIssue/:inquiryId',
           name: 'addissue',
           component: QuestionAddIssue
         }]
