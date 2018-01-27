@@ -130,8 +130,6 @@ export default {
      * @param {number} questionIndex 点击保存所在的问题系数
      */
     saveQuestion (questionIndex) {
-      // 这里提交(把整个数组提交)---进入换冲
-      // 提交成功后关闭运行下面代码 ------------------------
       this.$store.dispatch('saveQuestion', questionIndex)
     },
     /**
@@ -139,7 +137,7 @@ export default {
      * @param {number} questionIndex 问题系数
      */
     addQuestion (questionIndex) {
-      this.$store.dispatch('addQuestion', questionIndex)
+      this.$store.commit('addQuestion', questionIndex)
     },
     /**
      * 修改自己的分数

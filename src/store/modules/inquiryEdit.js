@@ -108,12 +108,13 @@ export default {
      * @param {Object} questionInfo 问题对象
      * @param {Array} opationInfo 选项数组
      */
-    addQuestion (state, {questionInfo, opationInfo}) {
-      let question = new Question(questionInfo.id, questionInfo.content, false)
-      opationInfo.forEach(opationItem => {
-        question.setOpation(new Opation(opationItem.content, opationItem.content, false, opationItem.score))
-      })
-      state.inquiryData.setQuestion(question, questionInfo.num)
+    addQuestion (state, questionIndex) {
+      let opation1 = new Opation('新建选项1', '新建选项1', false, 0)
+      let opation2 = new Opation('新建选项2', '新建选项2', false, 0)
+      let question = new Question('', '新建问题', false)
+      question.setOpation(opation1)
+      question.setOpation(opation2)
+      state.inquiryData.setQuestion(question, questionIndex + 1)
     },
     /**
      * opation 修改分数
@@ -172,35 +173,13 @@ export default {
       })
     },
     /**
-     * 增加问题
-     * @param {Object} state 状态
-     * @param {number} questionIndex 问题系数
-     */
-    addQuestion (state, questionIndex) {
-      axios.post('home/manager/addQuestion', {
-        inquiryId: state.state.inquiryData.id,
-        questionNum: questionIndex + 2
-      })
-      .then(res => {
-        let result = res.data
-        if (result.statusObj.status === 1) {
-          this.commit('addQuestion', {
-            questionInfo: result.questionInfo,
-            opationInfo: result.opationInfo
-          })
-        } else {
-          alert('增加问题错误')
-        }
-      })
-    },
-    /**
      * 通过问题系数保存问题信息
      * @param {Object} state 状态
      * @param {number} questionIndex 问题系数
      */
     saveQuestion (state, questionIndex) {
-      axios.post('/home/manager/saveQuestion', {
-        questionInfo: state.inquiryData.questionData[questionIndex]
+      axios.post('/home/manager/saveInquiry', {
+        inquiryInfo: state.state.inquiryData
       })
       .then(res => {
         this.commit('closeEdit', questionIndex)
@@ -210,19 +189,14 @@ export default {
       })
     },
     deleteQuestion (state, questionIndex) {
-      let questionId = state.state.inquiryData.questionData[questionIndex].id
-      axios.post('/home/manager/deleteQuestion', {
-        inquiryId: state.state.inquiryData.id,
-        questionNum: questionIndex + 1,
-        questionId
+      axios.post('/home/manager/saveInquiry', {
+        inquiryInfo: state.state.inquiryData
       })
       .then(res => {
-        let result = res.data
-        if (result.statusObj.status === 1) {
-          this.commit('deleteQuestion', questionIndex)
-        } else {
-          alert('删除问题错误')
-        }
+        this.commit('deleteQuestion', questionIndex)
+      })
+      .catch(e => {
+        console.log(e)
       })
     }
   }

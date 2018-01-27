@@ -14,7 +14,7 @@
       <p class="issue-describe">{{inquiryData.describe}}</p>
       <IssueEdit :inquiryData="inquiryData"></IssueEdit>
       <div class="save-inquiry-button">
-        <ButtonPack>保存问卷</ButtonPack>
+        <ButtonPack @click.native="saveInquiry">保存问卷</ButtonPack>
       </div>
     </ItemBody>
   </HomeItem>
@@ -48,7 +48,20 @@ export default {
       return this.$store.state.inquiryEdit.inquiryData
     }
   },
-  methods: {}
+  methods: {
+    saveInquiry () {
+      this.$http.post('/home/manager/saveInquiry', {
+        inquiryInfo: this.inquiryData
+      })
+      .then(res => {
+        // 跳页
+        alert('保存成功,跳页了')
+      })
+      .catch(e => {
+        console.log(e)
+      })
+    }
+  }
 }
 </script>
 <style scoped>
