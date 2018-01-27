@@ -105,15 +105,15 @@ export default {
     /**
      * 在index后增加问题
      * @param {Object} state 状态
-     * @param {number} questionIndex 问题系数
+     * @param {Object} questionInfo 问题对象
+     * @param {Array} opationInfo 选项数组
      */
-    addQuestion (state, questionIndex) {
-      let opation1 = new Opation('新建选项1', '新建选项1', false, 0)
-      let opation2 = new Opation('新建选项2', '新建选项2', false, 0)
-      let question = new Question('新建问题', false)
-      question.setOpation(opation1)
-      question.setOpation(opation2)
-      state.inquiryData.setQuestion(question, questionIndex + 1)
+    addQuestion (state, {questionInfo, opationInfo}) {
+      let question = new Question(questionInfo.id, questionInfo.content, false)
+      opationInfo.forEach(opationItem => {
+        question.setOpation(new Opation(opationItem.content, opationItem.content, false, opationItem.score))
+      })
+      state.inquiryData.setQuestion(question, questionInfo.num)
     },
     /**
      * opation 修改分数
@@ -131,10 +131,10 @@ export default {
      * @param {Array} inquiryData 问卷信息
      */
     setInquiry (state, {inquiryData, questionData, opationData}) {
-      let inquiry = new Inquiry(inquiryData.title, inquiryData.description)
+      let inquiry = new Inquiry(inquiryData.id, inquiryData.title, inquiryData.description)
       questionData.forEach(questionItem => {
         // 新建问题
-        let tempQuestion = new Question(questionItem.content, false)
+        let tempQuestion = new Question(questionItem.id, questionItem.content, false)
         opationData.forEach(opationItem => {
           // 添加该问题的选项
           if (questionItem.id === opationItem.question_id) {
@@ -147,15 +147,18 @@ export default {
     }
   },
   actions: {
+    /**
+     * 获取问卷全部信息
+     * @param {Object} state 状态
+     * @param {String} inquiryId 问卷id
+     */
     getInquiry (state, inquiryId) {
-      // 查询数据库数据然后commit-------------------
       axios.post('/home/manager/selectInquiry', {
         inquiryId
       })
       .then(res => {
         let result = res.data
         if (result.statusObj.status === 1) {
-          console.log(result)
           this.commit('setInquiry', {
             inquiryData: result.inquiryInfo,
             questionData: result.questionInfo,
@@ -166,6 +169,60 @@ export default {
       })
       .catch(e => {
         console.log(e)
+      })
+    },
+    /**
+     * 增加问题
+     * @param {Object} state 状态
+     * @param {number} questionIndex 问题系数
+     */
+    addQuestion (state, questionIndex) {
+      axios.post('home/manager/addQuestion', {
+        inquiryId: state.state.inquiryData.id,
+        questionNum: questionIndex + 2
+      })
+      .then(res => {
+        let result = res.data
+        if (result.statusObj.status === 1) {
+          this.commit('addQuestion', {
+            questionInfo: result.questionInfo,
+            opationInfo: result.opationInfo
+          })
+        } else {
+          alert('增加问题错误')
+        }
+      })
+    },
+    /**
+     * 通过问题系数保存问题信息
+     * @param {Object} state 状态
+     * @param {number} questionIndex 问题系数
+     */
+    saveQuestion (state, questionIndex) {
+      axios.post('/home/manager/saveQuestion', {
+        questionInfo: state.inquiryData.questionData[questionIndex]
+      })
+      .then(res => {
+        this.commit('closeEdit', questionIndex)
+      })
+      .catch(e => {
+        console.log(e)
+      })
+    },
+    deleteQuestion (state, questionIndex) {
+      let questionId = state.state.inquiryData.questionData[questionIndex].id
+      axios.post('/home/manager/deleteQuestion', {
+        inquiryId: state.state.inquiryData.id,
+        questionNum: questionIndex + 1,
+        questionId
+      })
+      .then(res => {
+        let result = res.data
+        if (result.statusObj.status === 1) {
+          this.commit('deleteQuestion', questionIndex)
+        } else {
+          alert('删除问题错误')
+        }
       })
     }
   }
@@ -210,10 +267,12 @@ class Opation {
 class Question {
   /**
    * 问题的对象
+   * @param {String} questionId 问题id
    * @param {String} name 问题名
    * @param {boolean} isEdit 是否编辑
    */
-  constructor (name, isEdit) {
+  constructor (questionId, name, isEdit) {
+    this.id = questionId
     this.name = name
     this.isEdit = isEdit
     // 内部属性
@@ -278,10 +337,12 @@ class Question {
 class Inquiry {
   /**
    * 问卷构造函数
+   * @param {String} id 问卷id
    * @param {String} name 问卷名
    * @param {String} describe 问卷描述
    */
-  constructor (name, describe) {
+  constructor (id, name, describe) {
+    this.id = id
     this.name = name
     this.describe = describe
     this.maxScore = 0

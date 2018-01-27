@@ -32,7 +32,7 @@ export default {
       if (this.questionData.length === 1) {
         alert('问卷至少有一道题')
       } else {
-        this.$store.commit('deleteQuestion', questionIndex)
+        this.$store.dispatch('deleteQuestion', questionIndex)
       }
     }
   }

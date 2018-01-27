@@ -132,14 +132,14 @@ export default {
     saveQuestion (questionIndex) {
       // 这里提交(把整个数组提交)---进入换冲
       // 提交成功后关闭运行下面代码 ------------------------
-      this.$store.commit('closeEdit', questionIndex)
+      this.$store.dispatch('saveQuestion', questionIndex)
     },
     /**
      * 在index后增加问题
      * @param {number} questionIndex 问题系数
      */
     addQuestion (questionIndex) {
-      this.$store.commit('addQuestion', questionIndex)
+      this.$store.dispatch('addQuestion', questionIndex)
     },
     /**
      * 修改自己的分数
