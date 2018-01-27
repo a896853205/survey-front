@@ -55,7 +55,7 @@ export default {
       })
       .then(res => {
         // 跳页
-        alert('保存成功,跳页了')
+        location.href = `/#/home/questionAdd/AddEpilog/${this.inquiryData.id}`
       })
       .catch(e => {
         console.log(e)

@@ -3,7 +3,7 @@
   <HomeItem widType="2">
     <ItemHead>创建过程</ItemHead>
     <div class="process-item">
-      <span class="active-background" :style="{'width': process.processStatus * 25 + '%'}"></span>
+      <span class="active-background" :style="{'width': process.processStatus * (100 / process.processData.length) + '%'}"></span>
       <span :key="index" v-for="(item, index) in process.processData" class="process-span" :class="{'active-span': process.processStatus >= index + 1}">
         <i class="iconfont icon-assessedbadge" :style="{'font-size': process.processStatus >= index + 1 ? '14px' : '0'}"></i>
         {{index + 1 + '.' + item}}

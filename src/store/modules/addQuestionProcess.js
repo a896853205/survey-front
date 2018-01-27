@@ -2,8 +2,8 @@
 export default {
   state: {
     processStatus: 0,
-    processData: ['选择类别', '添加基本信息', '添加题目', '确认发布'],
-    processClass: ['icon-viewgallery', 'icon-signboard', 'icon-rfq', 'icon-scanning', 'icon-templatedefault']
+    processData: ['选择类别', '添加基本信息', '添加题目', '添加结语', '确认发布'],
+    processClass: ['icon-viewgallery', 'icon-signboard', 'icon-rfq', 'icon-smile', 'icon-scanning', 'icon-templatedefault']
   },
   mutations: {
     /**
