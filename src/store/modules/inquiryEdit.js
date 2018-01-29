@@ -2,7 +2,8 @@ let axios = require('axios')
 // 编辑问卷变量储存
 export default {
   state: {
-    inquiryData: {}
+    inquiryData: {},
+    inquiryEpilog: []
   },
   mutations: {
     /**
@@ -145,6 +146,62 @@ export default {
         inquiry.setQuestion(tempQuestion)
       })
       state.inquiryData = inquiry
+    },
+    /**
+     * 设置结语
+     * @param {Object} state 状态
+     * @param {Array} epilogData 结语数组
+     */
+    setEpilog (state, epilogData) {
+      // 如果没有结语就放在前台一个数据
+      // 如果有就显示查出来的
+      if (epilogData.length === 0) {
+        state.inquiryEpilog = [{
+          minScore: 0,
+          maxScore: state.inquiryData.maxScore,
+          remark: ''
+        }]
+      } else {
+        state.inquiryEpilog = epilogData
+      }
+    },
+    /**
+     * 设置最小分值
+     * @param state 状态
+     * @param value 要设置的值
+     * @param epilogIndex 结语的系数
+     */
+    setMinScore (state, {value, epilogIndex}) {
+      state.inquiryEpilog[epilogIndex].minScore = parseInt(value)
+    },
+    /**
+     * 设置最大分值
+     * @param state 状态
+     * @param value 要设置的值
+     * @param epilogIndex 结语的系数
+     */
+    setMaxScore (state, {value, epilogIndex}) {
+      state.inquiryEpilog[epilogIndex].maxScore = parseInt(value)
+    },
+    /**
+     * 设置最大分值
+     * @param state 状态
+     * @param value 要设置的值
+     * @param epilogIndex 结语的系数
+     */
+    setRemark (state, {value, epilogIndex}) {
+      state.inquiryEpilog[epilogIndex].remark = value
+    },
+    /**
+     * 增加一个结语
+     * @param {Object} state 状态
+     */
+    addEpilog (state) {
+      state.inquiryEpilog.push({
+        minScore: 0,
+        maxScore: state.inquiryData.maxScore,
+        remark: ''
+      })
     }
   },
   actions: {
@@ -164,6 +221,16 @@ export default {
             inquiryData: result.inquiryInfo,
             questionData: result.questionInfo,
             opationData: result.opationInfo})
+          // 查询这个问卷是否有评语,如说有就放到vuex中,如果没有就放一个假的
+          return axios.post('/home/manager/selectEpilog', {inquiryId})
+        } else {
+          alert('未查到问卷信息')
+        }
+      })
+      .then(res => {
+        let result = res.data
+        if (result.statusObj.status === 1) {
+          this.commit('setEpilog', result.epilogInfo)
         } else {
           alert('未查到问卷信息')
         }
@@ -188,6 +255,11 @@ export default {
         console.log(e)
       })
     },
+    /**
+     * 看似是删除问题,其实只是刷新数据库而已
+     * @param {Object} state 状态
+     * @param {number} questionIndex 问题系数
+     */
     deleteQuestion (state, questionIndex) {
       axios.post('/home/manager/saveInquiry', {
         inquiryInfo: state.state.inquiryData
@@ -201,7 +273,6 @@ export default {
     }
   }
 }
-
 /**
  * 选项构造函数
  */

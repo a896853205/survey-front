@@ -22,6 +22,8 @@ import QuestionAddAddTitle from '@/components/homeChild/question/questionAddChil
 import QuestionAddIssue from '@/components/homeChild/question/questionAddChild/AddIssue'
 // 后台问卷结语增加组件
 import QuestionAddEpilog from '@/components/homeChild/question/questionAddChild/AddEpilog'
+// 后台问卷结语增加组件
+import QuestionAddPublish from '@/components/homeChild/question/questionAddChild/AddPublish'
 // 后台回答分析组件
 import HomeAnswerAnalyze from '@/components/homeChild/answer/HomeAnswerAnalyze'
 // 后台回答展示组件
@@ -79,6 +81,10 @@ export default new Router({
           path: '/home/questionAdd/AddEpilog/:inquiryId',
           name: 'addepilog',
           component: QuestionAddEpilog
+        }, {
+          path: '/home/questionAdd/AddPublish/:inquiryId',
+          name: 'questionaddpublish',
+          component: QuestionAddPublish
         }]
       }, {
         path: '/home/answerAnalyze',
