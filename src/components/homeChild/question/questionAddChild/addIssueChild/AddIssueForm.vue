@@ -55,7 +55,12 @@ export default {
       })
       .then(res => {
         // 跳页
-        location.href = `/#/home/questionAdd/AddEpilog/${this.inquiryData.id}`
+        let result = res.data
+        if (result.statusObj.status === 1) {
+          location.href = `/#/home/questionAdd/AddEpilog/${this.inquiryData.id}`
+        } else {
+          alert('保存问卷失败,请稍后重试')
+        }
       })
       .catch(e => {
         console.log(e)

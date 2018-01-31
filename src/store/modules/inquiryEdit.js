@@ -133,7 +133,7 @@ export default {
      * @param {Array} inquiryData 问卷信息
      */
     setInquiry (state, {inquiryData, questionData, opationData}) {
-      let inquiry = new Inquiry(inquiryData.id, inquiryData.title, inquiryData.description)
+      let inquiry = new Inquiry(inquiryData.id, inquiryData.title, inquiryData.description, inquiryData.create_time, inquiryData.end_time, inquiryData.switch)
       questionData.forEach(questionItem => {
         // 新建问题
         let tempQuestion = new Question(questionItem.id, questionItem.content, false)
@@ -202,6 +202,9 @@ export default {
         maxScore: state.inquiryData.maxScore,
         remark: ''
       })
+    },
+    toggleInquiry (state, openState) {
+      state.inquiryData.toggle = openState
     }
   },
   actions: {
@@ -385,12 +388,17 @@ class Inquiry {
    * @param {String} id 问卷id
    * @param {String} name 问卷名
    * @param {String} describe 问卷描述
+   * @param {String} beginTime 问卷开始时间
+   * @param {String} endTime 问卷结束时间
    */
-  constructor (id, name, describe) {
+  constructor (id, name, describe, beginTime, endTime, toggle) {
     this.id = id
     this.name = name
     this.describe = describe
     this.maxScore = 0
+    this.beginTime = beginTime
+    this.endTime = endTime
+    this.toggle = toggle
     this.questionData = []
   }
   /**
