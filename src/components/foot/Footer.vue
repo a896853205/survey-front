@@ -1,4 +1,7 @@
-<!-- Footer.vue -->
+<!-- Footer.vue
+// 底部组件
+import Foot from '@/components/foot/Footer'
+ -->
 <template>
   <div id="buttom">
     <div class="container" :class="type">

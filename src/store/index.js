@@ -6,6 +6,10 @@ import User from './modules/user'
 import addQuestionProcess from './modules/addQuestionProcess'
 // 编辑问卷变量储存
 import inquiryEdit from './modules/inquiryEdit'
+// 等待模块
+import Loading from './modules/loading'
+// 提示模块
+import Notification from './modules/notification'
 // 使用Vuex
 Vue.use(Vuex)
 
@@ -15,7 +19,9 @@ let store = new Vuex.Store({
     // 用户模块
     User,
     addQuestionProcess,
-    inquiryEdit
+    inquiryEdit,
+    Loading,
+    Notification
   }
 })
 

@@ -1,4 +1,7 @@
-<!-- FormPack.vue -->
+<!-- FormPack.vue
+// form组件
+import FormPack from '@/components/form/FormPack'
+ -->
 <template>
   <div>
     <div :key="index" 

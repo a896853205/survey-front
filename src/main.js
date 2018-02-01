@@ -5,6 +5,13 @@ import App from './App'
 import router from './router'
 import store from './store'
 import axios from './axiosConfig'
+import { Notification, Table, TableColumn } from 'element-ui'
+
+// 使用通知组件
+Vue.component(Notification.name, Notification)
+Vue.component(Table.name, Table)
+Vue.component(TableColumn.name, TableColumn)
+Vue.prototype.$notify = Notification
 
 Vue.config.productionTip = false
 

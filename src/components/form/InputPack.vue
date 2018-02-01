@@ -1,3 +1,7 @@
+<!-- Input.vue
+// input组件
+import InputPack from '@/components/form/InputPack'
+ -->
 <template>
   <input :value="value" 
          @input="getValue"

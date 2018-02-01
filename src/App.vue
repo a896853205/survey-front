@@ -1,12 +1,22 @@
 <template>
   <div id="app">
     <router-view/>
+    <Loading></Loading>
+    <Notification></Notification>
   </div>
 </template>
 
 <script>
+// 等待组件
+import Loading from '@/components/util/load'
+// home单元组件
+import Notification from '@/components/util/Notification'
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    Loading,
+    Notification
+  }
 }
 </script>
 

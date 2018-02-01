@@ -1,4 +1,7 @@
-<!-- ButtonPack.vue -->
+<!-- ButtonPack.vue
+// button组件
+import ButtonPack from '@/components/form/ButtonPack'
+ -->
 <template>
   <button type="button" class="button-pack">
     <slot>登录</slot>

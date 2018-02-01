@@ -248,13 +248,23 @@ export default {
      * @param {number} questionIndex 问题系数
      */
     saveQuestion (state, questionIndex) {
+      // 开始等待
+      this.commit('startLoad')
       axios.post('/home/manager/saveInquiry', {
         inquiryInfo: state.state.inquiryData
       })
       .then(res => {
+        // 结束等待
+        this.commit('stopLoad')
+        this.commit('alert', {
+          title: '保存问题',
+          content: '成功'
+        })
         this.commit('closeEdit', questionIndex)
       })
       .catch(e => {
+        // 结束等待
+        this.commit('startLoad')
         console.log(e)
       })
     },

@@ -1,4 +1,7 @@
-<!-- ItemHead.vue -->
+<!-- ItemHead.vue
+// item单元头
+import ItemHead from '@/components/homeChild/item/ItemHead'
+ -->
 <template>
   <div class="item-head">
    <slot></slot>
