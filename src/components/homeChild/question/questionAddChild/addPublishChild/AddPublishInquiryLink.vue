@@ -38,7 +38,8 @@ export default {
      * 获取问卷的url
      */
     inquiryUrl () {
-      return `${location.origin}/#/inquiry/${this.inquiryId}`
+      // 这里的#是%23
+      return `${location.origin}/%23/inquiry/${this.inquiryId}`
     },
     /**
      * 画出问卷的二维码的url
