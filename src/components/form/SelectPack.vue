@@ -2,9 +2,9 @@
 <template>
   <select class="select-pack" name="" id="">
     <option class="opation-pack"
-             :key="opationIndex" 
-             v-for="(opation, opationIndex) in opationData" 
-             :value="opation.value">{{ opation.name }}</option>
+            :key="opationIndex" 
+            v-for="(opation, opationIndex) in opationData" 
+            :value="opation.value">{{ opation.name }}</option>
   </select>
 </template>
 

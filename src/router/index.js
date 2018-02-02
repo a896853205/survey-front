@@ -33,6 +33,8 @@ import HomeConfigInfo from '@/components/homeChild/config/HomeConfigInfo'
 // 后台密码配置组件
 import HomeConfigPassword from '@/components/homeChild/config/HomeConfigPassword'
 
+// 用户权限 -----------------------------------------
+import Inquiry from '@/components/Inquiry'
 Vue.use(Router)
 
 export default new Router({
@@ -103,6 +105,10 @@ export default new Router({
         name: 'homeconfigpassword',
         component: HomeConfigPassword
       }]
+    }, {
+      path: '/inquiry/:inquiryId',
+      name: 'inquiry',
+      component: Inquiry
     }
   ]
 })

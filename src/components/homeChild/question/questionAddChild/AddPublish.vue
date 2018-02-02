@@ -264,7 +264,7 @@ export default {
     // 查询问卷信息,
     this.$store.commit('goProcess', 4)
     let inquiryId = this.$route.params.inquiryId
-    this.inquiryUrl = `${location.origin}/inquiry/${inquiryId}`
+    this.inquiryUrl = `${location.origin}/#/inquiry/${inquiryId}`
     this.QRUrl = `http://qr.liantu.com/api.php?text=${this.inquiryUrl}`
     this.$store.dispatch('getInquiry', inquiryId)
   }
