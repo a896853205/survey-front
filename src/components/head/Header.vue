@@ -1,4 +1,7 @@
-<!-- Header.vue -->
+<!-- Header.vue
+// Header组件
+import Header from '@/components/head/Header'
+ -->
 <template>
   <div id="top" :class="listData.style">
     <img class="web-logo web-white-logo" src="../../assets/white-logo.png" alt="LOGO">

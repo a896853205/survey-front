@@ -1,3 +1,7 @@
+<!-- Sub-header.vue
+// SubHeader组件
+import SubHeader from '@/components/head/Sub-header'
+-->
 <template>
   <div id="subHeader">
     <img class="web-logo" src="../../assets/white-logo.png" alt="logo">

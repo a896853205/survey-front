@@ -1,4 +1,7 @@
-<!-- SelectPack -->
+<!-- SelectPack
+// select组件
+import SelectPack from '@/components/form/SelectPack'
+ -->
 <template>
   <select class="select-pack" name="" id="">
     <option class="opation-pack"

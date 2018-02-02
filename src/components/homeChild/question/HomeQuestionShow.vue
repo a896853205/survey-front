@@ -75,6 +75,7 @@
 </template>
 
 <script>
+// echarts图表
 import echarts from 'echarts'
 // item单元头
 import ItemHead from '@/components/homeChild/item/ItemHead'

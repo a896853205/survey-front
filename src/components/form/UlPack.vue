@@ -1,4 +1,7 @@
-<!-- UlPack.vue -->
+<!-- UlPack.vue
+// Ul组件
+import UlPack from '@/components/form/UlPack'
+ -->
 <template>
   <!-- 这里不能有回车,因为inline -->
   <ul :class="listClass"><li :key="item.name" v-for="item in linkList"><a :href="item.href">{{ item.name }}</a></li></ul>
