@@ -1,7 +1,12 @@
-<!-- FlowContainer.vue -->
+<!-- FlowContainer.vue
+// flow布局大框架
+import FlowContainer from '@/components/layOut/flow/FlowContainer'
+ -->
 <template>
-  <div>
-    // FlowContainer.vue
+  <div class="flow-layout">
+    <slot>
+      // FlowContainer.vue
+    </slot>
   </div>
 </template>
 
@@ -18,4 +23,8 @@ export default {
 }
 </script>
 <style scoped>
+.flow-layout {
+  display: flex;
+  justify-content: space-between;
+}
 </style>
