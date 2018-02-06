@@ -39,13 +39,13 @@ export default {
      */
     inquiryUrl () {
       // 这里的#是%23
-      return `${location.origin}/%23/inquiry/${this.inquiryId}`
+      return `${location.origin}/#/inquiry/${this.inquiryId}`
     },
     /**
      * 画出问卷的二维码的url
      */
     QRUrl () {
-      return `http://qr.liantu.com/api.php?text=${this.inquiryUrl}`
+      return `http://qr.liantu.com/api.php?text=${location.origin}/%23/inquiry/${this.inquiryId}`
     }
   },
   methods: {}

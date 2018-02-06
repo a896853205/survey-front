@@ -209,7 +209,7 @@ export default {
   },
   actions: {
     /**
-     * 获取问卷全部信息
+     * 获取问卷全部信息(编辑状态)
      * @param {Object} state 状态
      * @param {String} inquiryId 问卷id
      */
@@ -226,6 +226,40 @@ export default {
             opationData: result.opationInfo})
           // 查询这个问卷是否有评语,如说有就放到vuex中,如果没有就放一个假的
           return axios.post('/home/manager/selectEpilog', {inquiryId})
+        } else {
+          alert('未查到问卷信息')
+        }
+      })
+      .then(res => {
+        let result = res.data
+        if (result.statusObj.status === 1) {
+          this.commit('setEpilog', result.epilogInfo)
+        } else {
+          alert('未查到问卷信息')
+        }
+      })
+      .catch(e => {
+        console.log(e)
+      })
+    },
+    /**
+    * 获取问卷全部信息(编辑状态)
+    * @param {Object} state 状态
+    * @param {String} inquiryId 问卷id
+    */
+    getInquiryInUser (state, inquiryId) {
+      axios.post('/selectInquiry', {
+        inquiryId
+      })
+      .then(res => {
+        let result = res.data
+        if (result.statusObj.status === 1) {
+          this.commit('setInquiry', {
+            inquiryData: result.inquiryInfo,
+            questionData: result.questionInfo,
+            opationData: result.opationInfo})
+          // 查询这个问卷是否有评语,如说有就放到vuex中,如果没有就放一个假的
+          return axios.post('/selectEpilog', {inquiryId})
         } else {
           alert('未查到问卷信息')
         }
@@ -264,7 +298,7 @@ export default {
       })
       .catch(e => {
         // 结束等待
-        this.commit('startLoad')
+        this.commit('stopLoad')
         console.log(e)
       })
     },

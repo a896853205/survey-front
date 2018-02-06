@@ -34,7 +34,10 @@ import HomeConfigInfo from '@/components/homeChild/config/HomeConfigInfo'
 import HomeConfigPassword from '@/components/homeChild/config/HomeConfigPassword'
 
 // 用户权限 -----------------------------------------
+// 问卷组件
 import Inquiry from '@/components/Inquiry'
+// 回复组件
+import AnswerAnalyze from '@/components/AnswerAnalyze'
 Vue.use(Router)
 
 export default new Router({
@@ -109,6 +112,10 @@ export default new Router({
       path: '/inquiry/:inquiryId',
       name: 'inquiry',
       component: Inquiry
+    }, {
+      path: '/answerAnalyze/:answerId',
+      name: 'analyze',
+      component: AnswerAnalyze
     }
   ]
 })
