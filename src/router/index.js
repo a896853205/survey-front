@@ -28,9 +28,6 @@ import QuestionAddPublish from '@/components/homeChild/question/questionAddChild
 import HomeAnswerShow from '@/components/homeChild/answer/HomeAnswerShow'
 // 后台信息配置组件
 import HomeConfigInfo from '@/components/homeChild/config/HomeConfigInfo'
-// 后台密码配置组件
-import HomeConfigPassword from '@/components/homeChild/config/HomeConfigPassword'
-
 // 用户权限 -----------------------------------------
 // 问卷组件
 import Inquiry from '@/components/Inquiry'
@@ -97,10 +94,6 @@ export default new Router({
         path: '/home/configInfo',
         name: 'homeconfiginfo',
         component: HomeConfigInfo
-      }, {
-        path: '/home/configPassword',
-        name: 'homeconfigpassword',
-        component: HomeConfigPassword
       }]
     }, {
       path: '/inquiry/:inquiryId',

@@ -17,7 +17,8 @@ import FormPack from '@/components/form/FormPack'
         </span>
       </div>
       <div class="form-right">
-        <InputPack v-if="item.type === 'input'"
+        <InputPack v-if="item.type === 'input' || item.type === 'password'"
+                   :type="item.type"
                    :disabled="item.isDisable"
                    :placeholder="item.placeholder"
                    :value="item.value"

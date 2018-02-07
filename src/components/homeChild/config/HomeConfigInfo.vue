@@ -15,11 +15,15 @@
           </li>
           <li>
             <strong>[新密码]</strong>
-            <span>输入新密码(选填)</span>
+            <span>输入新密码(必填)</span>
           </li>
           <li>
             <strong>[重复新密码]</strong>
-            <span>再次输入新密码(选填)</span>
+            <span>再次输入新密码(必填)</span>
+          </li>
+          <li>
+            <strong>[姓名]</strong>
+            <span>再次输入姓名(选填)</span>
           </li>
         </ul>
       </ItemBody>
@@ -51,12 +55,12 @@ export default {
         type: 'input',
         isImport: false,
         placeholder: '',
-        value: '896853205',
+        value: '',
         isDisable: true,
         name: 'inquiryType'
       }, {
         title: '原密码',
-        type: 'input',
+        type: 'password',
         isImport: true,
         placeholder: '输入原始密码',
         value: '',
@@ -64,7 +68,7 @@ export default {
         name: 'oldPassword'
       }, {
         title: '新密码',
-        type: 'input',
+        type: 'password',
         isImport: true,
         placeholder: '输入新密码',
         value: '',
@@ -72,7 +76,7 @@ export default {
         name: 'newPassword'
       }, {
         title: '重复新密码',
-        type: 'input',
+        type: 'password',
         isImport: true,
         placeholder: '再次输入新密码',
         value: '',
@@ -85,7 +89,7 @@ export default {
         placeholder: '输入你的姓名',
         value: '',
         isDisable: false,
-        name: 'reNewPassword'
+        name: 'name'
       }, {
         title: '',
         type: 'button',
@@ -103,14 +107,25 @@ export default {
     ItemBody,
     FormPack
   },
-  computed: {},
+  computed: {
+    getUserInfo () {
+      this.formData[0].value = this.$store.state.User.account
+      this.formData[4].value = this.$store.state.User.name
+    }
+  },
   methods: {
+    /**
+     * 更新我的信息
+     */
     updateMyInfo (formData) {
       this.$http.post('/home/manager/updateMyInfo',
         formData
       )
       .then(res => {
         // 提示修改成功--------------------------------
+        if (res.data.statusObj.status === 1) {
+          location.href = '/#/login'
+        }
       })
       .catch(e => {
         alert('网络错误,请稍后再试')
@@ -118,7 +133,8 @@ export default {
       })
     }
   },
-  beforeMount () {
+  watch: {
+    getUserInfo () {}
   }
 }
 </script>
