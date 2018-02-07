@@ -111,6 +111,7 @@ export default {
     getUserInfo () {
       this.formData[0].value = this.$store.state.User.account
       this.formData[4].value = this.$store.state.User.name
+      return this.$store.state.User
     }
   },
   methods: {
@@ -118,7 +119,7 @@ export default {
      * 更新我的信息
      */
     updateMyInfo (formData) {
-      this.$http.post('/home/manager/updateMyInfo',
+      this.$http.post(`/home${this.getUserInfo.urlBase}/updateMyInfo`,
         formData
       )
       .then(res => {

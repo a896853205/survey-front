@@ -14,9 +14,9 @@
             :style="{'transform': arrRotate(li)}" 
             不想旋转就去掉
           -->
-          <i v-if='li.children.length != 0' 
-            :style="{'transform': arrRotate(li)}" 
-            class='iconfont icon-more'></i>
+          <i :style="{'transform': arrRotate(li)}" 
+             class='iconfont'
+             :class="li.iconClass"></i>
           <span :style="{'display': navUnflod ? 'inline' : 'none'}">{{li.liName}}</span>
         </a>
         <ul class='child-ul'>
@@ -58,7 +58,7 @@ export default {
         activeLi.maxHeight = maxHeight
       } else {
         if (activeLi.children.length === 0) {
-          // 跳转
+          location.href = activeLi.liHref
         } else {
           this.navData.forEach(item => {
             item.isShowChild = false
@@ -104,7 +104,6 @@ export default {
     this.$http.post('/home/all/getNav')
     .then(res => {
       // 回来加上样式数据,isShowChild,maxHeight
-      console.log(res)
       // 判断状态
       if (res.data.statusObj.status === 1) {
         res.data.navData.forEach(value => {

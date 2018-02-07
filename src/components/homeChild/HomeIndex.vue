@@ -1,4 +1,6 @@
-<!-- HomeIndex.vue -->
+<!-- HomeIndex.vue
+// 这个组件分权限
+ -->
 <template>
   <div class="home-index">
     <HomeItem widType="2"></HomeItem>
