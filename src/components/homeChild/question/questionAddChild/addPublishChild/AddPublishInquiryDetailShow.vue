@@ -3,7 +3,7 @@
 import AddPublishInquiryDetailShow from '@/components/homeChild/question/questionAddChild/addPublishChild/AddPublishInquiryDetailShow'
  -->
 <template>
-  <HomeItem widType="2">
+  <div>
     <ItemHead>
       问卷详细信息
     </ItemHead>
@@ -47,7 +47,7 @@ import AddPublishInquiryDetailShow from '@/components/homeChild/question/questio
         </ul>
       </div>
     </ItemBody>
-  </HomeItem>
+  </div>
 </template>
 
 <script>
@@ -218,7 +218,6 @@ export default {
   flex-wrap: wrap;
 }
 .inquiry-detail-info ul li {
-  height: 26px;
   line-height: 26px;
   font-size: 12px;
 }

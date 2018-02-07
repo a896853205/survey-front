@@ -24,8 +24,6 @@ import QuestionAddIssue from '@/components/homeChild/question/questionAddChild/A
 import QuestionAddEpilog from '@/components/homeChild/question/questionAddChild/AddEpilog'
 // 后台问卷结语增加组件
 import QuestionAddPublish from '@/components/homeChild/question/questionAddChild/AddPublish'
-// 后台回答分析组件
-import HomeAnswerAnalyze from '@/components/homeChild/answer/HomeAnswerAnalyze'
 // 后台回答展示组件
 import HomeAnswerShow from '@/components/homeChild/answer/HomeAnswerShow'
 // 后台信息配置组件
@@ -91,10 +89,6 @@ export default new Router({
           name: 'questionaddpublish',
           component: QuestionAddPublish
         }]
-      }, {
-        path: '/home/answerAnalyze',
-        name: 'homeansweranalyze',
-        component: HomeAnswerAnalyze
       }, {
         path: '/home/answerShow',
         name: 'homeanswershow',

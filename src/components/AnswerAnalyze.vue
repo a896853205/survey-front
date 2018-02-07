@@ -12,7 +12,8 @@
       </div>
     </section>
     <section class="section-bottom">
-      <div class="pie-chart" ref="pieChart"></div>
+      <!-- 饼形图 -->
+      <PieChart class="pie-chart" :analyzeArr="analyzeArr"></PieChart>
       <div class="bottom-right">
         <div class="bottom-right-item">
           <img src="../assets/analyze-icon-one.png" alt="">
@@ -40,80 +41,32 @@
 </template>
 
 <script>
-import echarts from 'echarts'
 // flow布局大框架
 import FlowContainer from '@/components/layOut/flow/FlowContainer'
 // flow布局每条列
 import FlowColumn from '@/components/layOut/flow/FlowColumn'
 // flow布局每块
 import FlowItem from '@/components/layOut/flow/FlowItem'
+// 回答总体分析饼形图
+import PieChart from '@/components/analyzeChild/PieChart'
 export default {
   name: 'answeranalyze',
   data () {
     return {
       myAnswer: {},
       myEpilog: [],
-      myInquiry: {}
+      myInquiry: {},
+      analyzeArr: []
     }
   },
   components: {
     FlowContainer,
     FlowColumn,
-    FlowItem
+    FlowItem,
+    PieChart
   },
   computed: {},
   methods: {
-    renderChart (analyzeArr) {
-      let chartData = []
-      let legendData = []
-      // 数据处理
-      analyzeArr.forEach(analyzeItem => {
-        chartData.push({
-          value: analyzeItem.num,
-          name: analyzeItem.score
-        })
-        legendData.push(analyzeItem.score)
-      })
-      this.inquiryEchart = echarts.init(this.$refs.pieChart)
-      this.inquiryEchart.setOption({
-        backgroundColor: 'rgba(0,0,0,0)',
-        title: {
-          text: '分值分布',
-          x: 'center',
-          textStyle: {
-            color: '#fff'
-          }
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
-        legend: {
-          orient: 'vertical',
-          left: 'right',
-          data: legendData,
-          textStyle: {
-            color: '#fff'
-          }
-        },
-        series: [
-          {
-            name: '分数分布',
-            type: 'pie',
-            radius: '70%',
-            center: ['50%', '50%'],
-            data: chartData,
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-              }
-            }
-          }
-        ]
-      })
-    }
   },
   beforeMount () {
     // 查询个人分析数据,
@@ -121,13 +74,12 @@ export default {
       answerId: this.$route.params.answerId
     })
     .then(res => {
-      console.log(res.data)
       if (res.data.statusObj.status === 1) {
         // 展示所有数据
         this.myAnswer = res.data.myAnswer
         this.myEpilog = res.data.myEpilog
         this.myInquiry = res.data.myInquiry
-        this.renderChart(res.data.analyzeArr)
+        this.analyzeArr = res.data.analyzeArr
       }
     })
   }

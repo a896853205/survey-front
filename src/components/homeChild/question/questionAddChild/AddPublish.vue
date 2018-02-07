@@ -1,13 +1,17 @@
 <!-- AddPublish.vue -->
 <template>
   <div class="row">
-    <AddPublishInquiryDetailShow></AddPublishInquiryDetailShow>
+    <HomeItem widType="2">
+      <AddPublishInquiryDetailShow></AddPublishInquiryDetailShow>
+    </HomeItem>
     <AddPublishInquiryLink :inquiryId="$route.params.inquiryId"></AddPublishInquiryLink>
     <AddPublishInquiryButton></AddPublishInquiryButton>
   </div>
 </template>
 
 <script>
+// home单元组件
+import HomeItem from '@/components/homeChild/HomeItem'
 // addPublishInquiryLink 问卷链接组件
 import AddPublishInquiryLink from '@/components/homeChild/question/questionAddChild/addPublishChild/AddPublishInquiryLink'
 // addPublishInquiryDetailShow 问卷详细信息组件
@@ -21,6 +25,7 @@ export default {
     }
   },
   components: {
+    HomeItem,
     AddPublishInquiryLink,
     AddPublishInquiryDetailShow,
     AddPublishInquiryButton
