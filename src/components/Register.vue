@@ -9,7 +9,7 @@
         <InputPack @getValue="getPassWord" type="password" placeholder="设置你的登录密码" class="mar-bom-small"></InputPack>
         <InputPack @getValue="getRePassWord" type="password" placeholder="再次输入你的密码" class="mar-bom-small"></InputPack>
         <InputPack @getValue="getTel" type="text" placeholder="输入你的手机号码" class="mar-bom-small"></InputPack>
-        <ButtonPack @hit="register">同意条款并注册</ButtonPack>
+        <ButtonPack @click.native="register">同意条款并注册</ButtonPack>
       </div>
       <div class="tips">
         <span>
