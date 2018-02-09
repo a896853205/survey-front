@@ -6,9 +6,8 @@ import Persion from '@/components/homeChild/persion/Persion'
   <FlowContainer>
     <FlowColumn col="6">
       <FlowItem>
-        // 左边一半大图表,右边表格
-        <br>
-        // 图表有许多员工,这些员工的已发布的问卷数,和未发布的问卷数.
+        <PieAndBarChart :managerArr="managerArr"
+                        class="pie-bar-chart"></PieAndBarChart>
       </FlowItem>
     </FlowColumn>
     <FlowColumn col="6">
@@ -33,9 +32,13 @@ import Persion from '@/components/homeChild/persion/Persion'
               :formatter="getInquiryLength"
               label="问卷量">
           </el-table-column>
-          <el-table-column type="expand">
+          <el-table-column label="详细"
+                           type="expand">
             <template slot-scope="props">
-              <ShowQuestionTable :inquiryData="props.row.inquiryData"
+              <ShowQuestionTable @publish="publish"
+                                 @disPublish="disPublish"
+                                 :inquiryData="props.row.inquiryData"
+                                 :inquiryIndex="props.$index"
                                  role="super"></ShowQuestionTable>
             </template>
           </el-table-column>
@@ -54,6 +57,9 @@ import FlowColumn from '@/components/layOut/flow/FlowColumn'
 import FlowItem from '@/components/layOut/flow/FlowItem'
 // 问卷总览表格组件
 import ShowQuestionTable from '@/components/homeChild/question/questionShowChild/ShowQuestionTable'
+// 饼型和条型图
+import PieAndBarChart from '@/components/homeChild/persion/persionChild/PieAndBarChart'
+
 export default {
   name: 'persion',
   data () {
@@ -65,7 +71,8 @@ export default {
     FlowContainer,
     FlowColumn,
     FlowItem,
-    ShowQuestionTable
+    ShowQuestionTable,
+    PieAndBarChart
   },
   computed: {},
   methods: {
@@ -114,6 +121,22 @@ export default {
      */
     getInquiryLength (row, column, cellValue) {
       return cellValue.length
+    },
+    /**
+     * 问卷发布
+     */
+    publish ({index, inquiryIndex}) {
+      this.managerArr[inquiryIndex].inquiryData[index].switch = '1'
+      // 触发刷新
+      this.managerArr.splice(0, 0)
+    },
+    /**
+     * 问卷不发布
+     */
+    disPublish ({index, inquiryIndex}) {
+      this.managerArr[inquiryIndex].inquiryData[index].switch = '0'
+      // 触发刷新
+      this.managerArr.splice(0, 0)
     }
   },
   beforeMount () {
@@ -127,4 +150,7 @@ export default {
 }
 </script>
 <style scoped>
+.pie-bar-chart {
+  height: 500px;
+}
 </style>

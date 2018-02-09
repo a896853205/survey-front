@@ -59,7 +59,7 @@ import FlowItem from '@/components/layOut/flow/FlowItem'
 // button组件
 import ButtonPack from '@/components/form/ButtonPack'
 export default {
-  props: ['inquiryData', 'role'],
+  props: ['inquiryData', 'role', 'inquiryIndex'],
   data () {
     return {
     }
@@ -180,6 +180,11 @@ export default {
         let result = res.data
         if (result.statusObj.status === 1) {
           inquiryData[index].switch = '1'
+          // 问卷发布
+          this.$emit('publish', {
+            index,
+            inquiryIndex: this.inquiryIndex
+          })
         } else {
           alert('发布未成功')
         }
@@ -196,7 +201,11 @@ export default {
       .then(res => {
         let result = res.data
         if (result.statusObj.status === 1) {
-          inquiryData[index].switch = '0'
+          // 设置成未发布
+          this.$emit('disPublish', {
+            index,
+            inquiryIndex: this.inquiryIndex
+          })
         } else {
           alert('取消发布未成功')
         }
