@@ -2,7 +2,8 @@
 <template>
   <FlowContainer>
     <FlowColumn col="8">
-      <ShowQuestionTable :inquiryData="inquiryData"></ShowQuestionTable>
+      <ShowQuestionTable :inquiryData="inquiryData"
+                         role="manager"></ShowQuestionTable>
     </FlowColumn>
     <FlowColumn col="4">
       <ShowQuestionDetail :inquiryData="inquiryData"></ShowQuestionDetail>

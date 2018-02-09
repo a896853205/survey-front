@@ -10,6 +10,8 @@ import Register from '@/components/Register'
 import Home from '@/components/Home'
 // 后台首页组件
 import HomeIndex from '@/components/homeChild/HomeIndex'
+// 人员管理组件
+import Persion from '@/components/homeChild/persion/Persion'
 // 后台问卷总览组件
 import HomeQuestionShow from '@/components/homeChild/question/HomeQuestionShow'
 // 后台问卷增加组件
@@ -57,6 +59,10 @@ export default new Router({
         path: '/home/index',
         name: 'homeindex',
         component: HomeIndex
+      }, {
+        path: '/home/persion',
+        name: 'persion',
+        component: Persion
       }, {
         path: '/home/questionShow',
         name: 'homequestionshow',

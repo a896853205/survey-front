@@ -26,6 +26,7 @@ export default {
     getWidth () {
       switch (this.col) {
         case '8': return 'col-md-8'
+        case '6': return 'col-md-6'
         case '4': return 'col-md-4'
         default: break
       }
@@ -41,6 +42,9 @@ export default {
 }
 .col-md-8 {
   width: 66.25%;
+}
+.col-md-6 {
+  width: 49.375%;
 }
 .col-md-4 {
   width: 32.5%;

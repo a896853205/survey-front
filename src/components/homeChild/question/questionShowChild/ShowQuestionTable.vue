@@ -35,8 +35,18 @@ import ShowQuestionTable from '@/components/homeChild/question/questionShowChild
         label="操作"
         width="90px">
         <template slot-scope="scope">
-          <a :href="operateInquriyUrl(scope.$index, inquiryData)" class="icon-edit iconfont icon-link"></a>
-          <i @click="deleteInquiry(scope.$index, inquiryData)" class="iconfont icon-delete icon-link"></i>
+          <div v-if="role === 'manager'">
+            <a :href="operateInquriyUrl(scope.$index, inquiryData)" class="icon-edit iconfont icon-link"></a>
+            <i @click="deleteInquiry(scope.$index, inquiryData)" class="iconfont icon-delete icon-link"></i>
+          </div>
+          <div v-else>
+            <i @click="publish(scope.$index, inquiryData)"
+               v-if="scope.row.switch === '0'" 
+               class="iconfont icon-iconfontplay2 icon-link"></i>
+            <i @click="disPublish(scope.$index, inquiryData)"
+               v-else
+               class="iconfont icon-iconfontstop icon-link"></i>
+          </div>
         </template>
       </el-table-column>
     </el-table>
@@ -46,14 +56,17 @@ import ShowQuestionTable from '@/components/homeChild/question/questionShowChild
 <script>
 // flow布局每条列
 import FlowItem from '@/components/layOut/flow/FlowItem'
+// button组件
+import ButtonPack from '@/components/form/ButtonPack'
 export default {
-  props: ['inquiryData'],
+  props: ['inquiryData', 'role'],
   data () {
     return {
     }
   },
   components: {
-    FlowItem
+    FlowItem,
+    ButtonPack
   },
   computed: {},
   methods: {
@@ -151,10 +164,44 @@ export default {
         padding: '0',
         color: '#373D41'
       }
-    }
+    },
     /**
      * 表头行样式回调函数结束
      */
+    /**
+     * 问卷发布事件
+     */
+    publish (index, inquiryData) {
+      this.$http.post('/home/super/toggle', {
+        inquiryId: inquiryData[index].id,
+        inquriySwitch: '1'
+      })
+      .then(res => {
+        let result = res.data
+        if (result.statusObj.status === 1) {
+          inquiryData[index].switch = '1'
+        } else {
+          alert('发布未成功')
+        }
+      })
+    },
+    /**
+     * 问卷取消发布事件
+     */
+    disPublish (index, inquiryData) {
+      this.$http.post('/home/super/toggle', {
+        inquiryId: inquiryData[index].id,
+        inquriySwitch: '0'
+      })
+      .then(res => {
+        let result = res.data
+        if (result.statusObj.status === 1) {
+          inquiryData[index].switch = '0'
+        } else {
+          alert('取消发布未成功')
+        }
+      })
+    }
   }
 }
 </script>
@@ -171,8 +218,17 @@ export default {
 }
 .icon-edit:hover {
   color: #00C1DE;
+  cursor: pointer;
 }
 .icon-delete:hover {
+  color: #FF0041;
+  cursor: pointer;
+}
+.icon-iconfontplay2:hover {
+  color: #00C1DE;
+  cursor: pointer;
+}
+.icon-iconfontstop:hover {
   color: #FF0041;
   cursor: pointer;
 }
