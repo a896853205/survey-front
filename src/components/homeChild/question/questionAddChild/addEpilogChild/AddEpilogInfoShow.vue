@@ -73,6 +73,9 @@ export default {
         return 0
       }
     },
+    /**
+     * 从vuex中获取值
+     */
     getEpilog () {
       return this.$store.state.inquiryEdit.inquiryEpilog
     }

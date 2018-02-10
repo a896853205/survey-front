@@ -91,12 +91,14 @@ export default {
     register () {
       this.$http.post('/register', this.user)
       .then(res => {
-        let result = res.data
-        if (result.status === 0) {
-          alert(result.errMessage)
-        } else {
-          // 显示登录成功-------------------------------
+        let result = res.data.statusObj
+        if (result.status === 1) {
+          // 显示登录成功
           location.href = '/#/login'
+          this.$store.commit('alert', {
+            title: '注册',
+            content: '成功'
+          })
         }
       })
     }

@@ -1,4 +1,7 @@
-<!-- AddIssueForm.vue -->
+<!-- AddIssueForm.vue
+// 问卷编辑组件
+import AddIssueForm from '@/components/homeChild/question/questionAddChild/addIssueChild/AddIssueForm'
+ -->
 <template>
   <HomeItem widType="3">
     <ItemHead>问卷编辑区</ItemHead>
@@ -44,23 +47,24 @@ export default {
     ButtonPack
   },
   computed: {
+    /**
+     * 从vuex获取问卷数据
+     */
     inquiryData () {
       return this.$store.state.inquiryEdit.inquiryData
     }
   },
   methods: {
+    /**
+     * 保存问卷
+     */
     saveInquiry () {
       this.$http.post('/home/manager/saveInquiry', {
         inquiryInfo: this.inquiryData
       })
       .then(res => {
-        // 跳页
-        let result = res.data
-        if (result.statusObj.status === 1) {
-          location.href = `/#/home/questionAdd/AddEpilog/${this.inquiryData.id}`
-        } else {
-          alert('保存问卷失败,请稍后重试')
-        }
+        // 编辑问卷结束,开始编辑结语
+        location.href = `/#/home/questionAdd/AddEpilog/${this.inquiryData.id}`
       })
       .catch(e => {
         console.log(e)

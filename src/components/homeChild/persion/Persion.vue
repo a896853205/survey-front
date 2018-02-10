@@ -142,9 +142,7 @@ export default {
   beforeMount () {
     this.$http.post('/home/super/getAllManager')
     .then(res => {
-      if (res.data.statusObj.status === 1) {
-        this.managerArr = res.data.managerArr
-      }
+      this.managerArr = res.data.managerArr
     })
   }
 }

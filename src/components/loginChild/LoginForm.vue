@@ -82,21 +82,12 @@ export default {
       this.$http.post('/login', this.user)
       .then(res => {
         let result = res.data
-        if (result.statusObj.status === 1) {
-          localStorage.setItem('token', result.token)
-          this.$http.defaults.headers.common['Authorization'] = result.token
-          // 塞到store里
-          this.$store.commit('getUser', result.user)
-          // 发出跳页申请
-          location.href = '#/home/index'
-        } else {
-          // 输出错误信息 -------------------------------------------------
-          alert(result.statusObj.errMessage)
-        }
-      })
-      .catch((e) => {
-        alert('网络错误,请稍后再试')
-        console.log(e)
+        localStorage.setItem('token', result.token)
+        this.$http.defaults.headers.common['Authorization'] = result.token
+        // 塞到store里
+        this.$store.commit('getUser', result.user)
+        // 发出跳页申请
+        location.href = '#/home/index'
       })
     }
   }

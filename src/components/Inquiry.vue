@@ -71,11 +71,8 @@ export default {
       this.$http.post('/saveAnswer', this.inquiryData)
       .then(res => {
         let result = res.data
-        if (result.statusObj.status === 1) {
-          // 跳到分析页
-          console.log(result)
-          location.href = `/#/answerAnalyze/${result.answerId}`
-        }
+        // 跳到分析页
+        location.href = `/#/answerAnalyze/${result.answerId}`
       })
     }
   },

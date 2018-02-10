@@ -70,10 +70,6 @@ export default {
       .then(res => {
         location.href = `/#/home/questionAdd/AddIssue/${res.data.inquiryId}`
       })
-      .catch(e => {
-        alert('网络错误,请稍后再试')
-        console.log(e)
-      })
     }
   }
 }

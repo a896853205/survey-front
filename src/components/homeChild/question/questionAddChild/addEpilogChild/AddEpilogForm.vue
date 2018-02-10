@@ -86,6 +86,17 @@ export default {
   },
   methods: {
     /**
+     * 处理分数
+     * @param {String | Number} unParseScore 未处理的分数
+     */
+    parseScore (unParseScore) {
+      let halfParse = parseInt(unParseScore)
+      if (isNaN(halfParse)) {
+        halfParse = 0
+      }
+      return halfParse
+    },
+    /**
      * 设置最小分值
      * @param value 要设置的值
      * @param epilogIndex 结语的系数
@@ -93,12 +104,20 @@ export default {
     setMinScore (value, {index}) {
       // 这里判断
       if (value < 0) {
-        alert('分值最小等于0')
+        this.$store.commit('alert', {
+          title: '结语分数错误',
+          content: '分值最小等于0'
+        })
         value = 0
       } else if (value > this.getEpilog[index].maxScore) {
-        alert('分值最大等于最大值')
+        this.$store.commit('alert', {
+          title: '结语分数错误',
+          content: '分值最大等于最大值'
+        })
         value = this.getEpilog[index].maxScore
       }
+      // 将数据处理一下
+      value = this.parseScore(value)
       this.$store.commit('setMinScore', {
         value,
         epilogIndex: index
@@ -112,12 +131,20 @@ export default {
     setMaxScore (value, {index}) {
       // 这里判断
       if (value < this.getEpilog[index].minScore) {
-        alert('分值最小等于最小值')
+        this.$store.commit('alert', {
+          title: '结语分数错误',
+          content: '分值最小等于最小值'
+        })
         value = this.getEpilog[index].minScore
       } else if (value > this.inquiryData.maxScore) {
-        alert('分值最大等于问卷最大值')
+        this.$store.commit('alert', {
+          title: '结语分数错误',
+          content: '分值最大等于问卷最大值'
+        })
         value = this.inquiryData.maxScore
       }
+      // 将数据处理一下
+      value = this.parseScore(value)
       this.$store.commit('setMaxScore', {
         value,
         epilogIndex: index
@@ -146,12 +173,7 @@ export default {
         inquiryEpilog: this.getEpilog
       })
       .then(res => {
-        let result = res.data
-        if (result.statusObj.status === 1) {
-          location.href = `/#/home/questionAdd/AddPublish/${this.inquiryData.id}`
-        } else {
-          alert('保存结语未成功')
-        }
+        location.href = `/#/home/questionAdd/AddPublish/${this.inquiryData.id}`
       })
     }
   }

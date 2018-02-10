@@ -1,4 +1,7 @@
-<!-- ProcessProgress.vue -->
+<!-- ProcessProgress.vue
+// 过程进度条组件
+import ProcessProgress from '@/components/homeChild/question/questionAddChild/ProcessProgress'
+ -->
 <template>
   <HomeItem widType="2">
     <ItemHead>创建过程</ItemHead>

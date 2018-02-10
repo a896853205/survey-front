@@ -30,7 +30,11 @@ export default {
      */
     deleteQuestion (questionIndex) {
       if (this.questionData.length === 1) {
-        alert('问卷至少有一道题')
+        this.$store.commit('alert',
+          {
+            title: '删除问题错误',
+            content: '问卷至少有一道题'
+          })
       } else {
         this.$store.dispatch('deleteQuestion', questionIndex)
       }

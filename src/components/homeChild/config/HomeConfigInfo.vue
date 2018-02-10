@@ -123,10 +123,12 @@ export default {
         formData
       )
       .then(res => {
-        // 提示修改成功--------------------------------
-        if (res.data.statusObj.status === 1) {
-          location.href = '/#/login'
-        }
+        // 提示修改成功
+        this.$store.commit('alert', {
+          title: '修改个人信息',
+          content: '修改成功'
+        })
+        location.href = '/#/login'
       })
       .catch(e => {
         alert('网络错误,请稍后再试')

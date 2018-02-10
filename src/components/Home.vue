@@ -90,19 +90,9 @@ export default {
           vm.$http.post('/home/all/getToken')
           .then(res => {
             let result = res.data
-            if (result.statusObj.status === 1) {
-              // 判断如果成功的话
-              // 把返回的值存入VUEX
-              vm.$store.commit('getUser', result.user)
-            } else {
-              // 如果不成功返回login页,而且把所有的token清空
-              // 这里应该输出token超时--------------------------
-              vm.$http.defaults.headers.common['Authorization'] = ''
-              window.localStorage.clear()
-              location.href = '/#/login'
-            }
-          }).catch(() => {
-            location.href = '/#/login'
+            // 判断如果成功的话
+            // 把返回的值存入VUEX
+            vm.$store.commit('getUser', result.user)
           })
         } else {
           location.href = '/#/login'

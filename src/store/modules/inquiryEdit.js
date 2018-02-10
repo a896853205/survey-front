@@ -219,24 +219,21 @@ export default {
       })
       .then(res => {
         let result = res.data
-        if (result.statusObj.status === 1) {
-          this.commit('setInquiry', {
-            inquiryData: result.inquiryInfo,
-            questionData: result.questionInfo,
-            opationData: result.opationInfo})
-          // 查询这个问卷是否有评语,如说有就放到vuex中,如果没有就放一个假的
-          return axios.post('/home/manager/selectEpilog', {inquiryId})
-        } else {
-          alert('未查到问卷信息')
+        // 判断是否查到该问卷,如果没有就退回增加题目页
+        if (!result.inquiryInfo) {
+          location.href = '/#/home/questionAdd/AddTitle'
         }
+        // 如果成功就继续
+        this.commit('setInquiry', {
+          inquiryData: result.inquiryInfo,
+          questionData: result.questionInfo,
+          opationData: result.opationInfo})
+        // 查询这个问卷是否有评语,如说有就放到vuex中,如果没有就放一个假的
+        return axios.post('/home/manager/selectEpilog', {inquiryId})
       })
       .then(res => {
         let result = res.data
-        if (result.statusObj.status === 1) {
-          this.commit('setEpilog', result.epilogInfo)
-        } else {
-          alert('未查到问卷信息')
-        }
+        this.commit('setEpilog', result.epilogInfo)
       })
       .catch(e => {
         console.log(e)
@@ -253,24 +250,23 @@ export default {
       })
       .then(res => {
         let result = res.data
-        if (result.statusObj.status === 1) {
+        // 输出无此问卷
+        if (!result.inquiryInfo) {
+          this.commit('alert', {
+            title: '问卷显示错误',
+            content: '无此问卷或问卷已关闭'
+          })
+        } else {
           this.commit('setInquiry', {
             inquiryData: result.inquiryInfo,
             questionData: result.questionInfo,
             opationData: result.opationInfo})
-          // 查询这个问卷是否有评语,如说有就放到vuex中,如果没有就放一个假的
-          return axios.post('/selectEpilog', {inquiryId})
-        } else {
-          alert('未查到问卷信息')
         }
+        return axios.post('/selectEpilog', {inquiryId})
       })
       .then(res => {
         let result = res.data
-        if (result.statusObj.status === 1) {
-          this.commit('setEpilog', result.epilogInfo)
-        } else {
-          alert('未查到问卷信息')
-        }
+        this.commit('setEpilog', result.epilogInfo)
       })
       .catch(e => {
         console.log(e)
@@ -283,13 +279,11 @@ export default {
      */
     saveQuestion (state, questionIndex) {
       // 开始等待
-      this.commit('startLoad')
       axios.post('/home/manager/saveInquiry', {
         inquiryInfo: state.state.inquiryData
       })
       .then(res => {
         // 结束等待
-        this.commit('stopLoad')
         this.commit('alert', {
           title: '保存问题',
           content: '成功'
@@ -298,7 +292,6 @@ export default {
       })
       .catch(e => {
         // 结束等待
-        this.commit('stopLoad')
         console.log(e)
       })
     },

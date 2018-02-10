@@ -1,4 +1,7 @@
-<!-- AddTitle.vue -->
+<!-- AddTitle.vue
+// 增加标题
+import AddTitle from '@/components/homeChild'
+ -->
 <template>
   <div class="row">
     <AddTitleDescribe></AddTitleDescribe>
@@ -13,8 +16,7 @@ import AddTitleDescribe from '@/components/homeChild/question/questionAddChild/a
 export default {
   name: 'addtitle',
   data () {
-    return {
-    }
+    return {}
   },
   components: {
     AddTitleForm,

@@ -104,16 +104,11 @@ export default {
     this.$http.post('/home/all/getNav')
     .then(res => {
       // 回来加上样式数据,isShowChild,maxHeight
-      // 判断状态
-      if (res.data.statusObj.status === 1) {
-        res.data.navData.forEach(value => {
-          value.isShowChild = false
-          value.maxHeight = maxHeight
-        })
-        this.navData = res.data.navData
-      } else {
-        alert('网络错误,未查到nav数据')
-      }
+      res.data.navData.forEach(value => {
+        value.isShowChild = false
+        value.maxHeight = maxHeight
+      })
+      this.navData = res.data.navData
     })
   }
 }

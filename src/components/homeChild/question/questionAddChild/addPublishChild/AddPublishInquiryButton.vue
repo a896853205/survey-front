@@ -59,13 +59,7 @@ export default {
         inquriySwitch: '1'
       })
       .then(res => {
-        let result = res.data
-        if (result.statusObj.status === 1) {
-          this.$store.commit('toggleInquiry', '1')
-          this.$store.commit('goProcess', 5)
-        } else {
-          alert('发布未成功')
-        }
+        this.$store.commit('toggleInquiry', '1')
       })
     },
     /**
@@ -77,13 +71,7 @@ export default {
         inquriySwitch: '0'
       })
       .then(res => {
-        let result = res.data
-        if (result.statusObj.status === 1) {
-          this.$store.commit('toggleInquiry', '0')
-          this.$store.commit('goProcess', 4)
-        } else {
-          alert('取消发布未成功')
-        }
+        this.$store.commit('toggleInquiry', '0')
       })
     }
   }

@@ -74,13 +74,11 @@ export default {
       answerId: this.$route.params.answerId
     })
     .then(res => {
-      if (res.data.statusObj.status === 1) {
-        // 展示所有数据
-        this.myAnswer = res.data.myAnswer
-        this.myEpilog = res.data.myEpilog
-        this.myInquiry = res.data.myInquiry
-        this.analyzeArr = res.data.analyzeArr
-      }
+      // 展示所有数据
+      this.myAnswer = res.data.myAnswer
+      this.myEpilog = res.data.myEpilog
+      this.myInquiry = res.data.myInquiry
+      this.analyzeArr = res.data.analyzeArr
     })
   }
 }

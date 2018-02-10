@@ -18,8 +18,6 @@
           <span @click="addOpation(questionIndex)" class="iconfont icon-add" title="增加选项"></span>
         </div>
       </div>
-      <!-- 中间的线 -->
-      <!-- <hr class="edit-hr"> -->
       <div class="edit-second-row">
         <span class="second-title">
           选项:

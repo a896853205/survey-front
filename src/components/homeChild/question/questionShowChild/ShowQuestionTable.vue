@@ -122,10 +122,8 @@ export default {
         inquiryId: inquiryData[index].id
       })
       .then(res => {
-        if (res.data.statusObj.status === 1) {
-          this.inquiryData.splice(index, 1)
-          this.$store.commit('alert', {title: '问卷操作', content: '删除成功'})
-        }
+        this.inquiryData.splice(index, 1)
+        this.$store.commit('alert', {title: '问卷操作', content: '删除成功'})
       })
     },
     // 表格样式回调
@@ -177,17 +175,12 @@ export default {
         inquriySwitch: '1'
       })
       .then(res => {
-        let result = res.data
-        if (result.statusObj.status === 1) {
-          inquiryData[index].switch = '1'
-          // 问卷发布
-          this.$emit('publish', {
-            index,
-            inquiryIndex: this.inquiryIndex
-          })
-        } else {
-          alert('发布未成功')
-        }
+        inquiryData[index].switch = '1'
+        // 问卷发布
+        this.$emit('publish', {
+          index,
+          inquiryIndex: this.inquiryIndex
+        })
       })
     },
     /**
@@ -199,16 +192,11 @@ export default {
         inquriySwitch: '0'
       })
       .then(res => {
-        let result = res.data
-        if (result.statusObj.status === 1) {
-          // 设置成未发布
-          this.$emit('disPublish', {
-            index,
-            inquiryIndex: this.inquiryIndex
-          })
-        } else {
-          alert('取消发布未成功')
-        }
+        // 设置成未发布
+        this.$emit('disPublish', {
+          index,
+          inquiryIndex: this.inquiryIndex
+        })
       })
     }
   }

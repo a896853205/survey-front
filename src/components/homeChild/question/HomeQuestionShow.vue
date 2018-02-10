@@ -40,14 +40,10 @@ export default {
   computed: {},
   methods: {},
   beforeMount () {
-    // 加载等待 ------------------------------
     this.$http.post('/home/manager/selectAllQuestion')
     .then(res => {
-      // 等待结束 ----------------------------------
       // 这里用statusObj判断,为1就放到inquiryData中
-      if (res.data.statusObj.status === 1) {
-        this.inquiryData = res.data.inquiryData
-      }
+      this.inquiryData = res.data.inquiryData
     })
   }
 }

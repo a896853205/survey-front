@@ -84,10 +84,8 @@ export default {
         inquiryId: this.$store.state.inquiryEdit.inquiryData.id
       })
       .then(res => {
-        if (res.data.statusObj.status === 1) {
-          // 展示所有数据
-          this.analyzeArr = res.data.analyzeArr
-        }
+        // 展示所有数据
+        this.analyzeArr = res.data.analyzeArr
       })
     },
     getAnswer () {
@@ -96,12 +94,13 @@ export default {
         inquiryId: this.$store.state.inquiryEdit.inquiryData.id
       })
       .then(res => {
-        if (res.data.statusObj.status === 1) {
-          // 展示所有数据
-          this.answerData = res.data.answerArr
-        }
+        // 展示所有数据
+        this.answerData = res.data.answerArr
       })
     },
+    /**
+     * 处理成折线数据
+     */
     getAnswerLineData () {
       let lineData = []
       this.answerData.forEach(answerItem => {

@@ -1,7 +1,8 @@
 // 增加问题过程变量储存
 export default {
   state: {
-    isLoad: false
+    isLoad: false,
+    isLoadNum: 0
   },
   mutations: {
     /**
@@ -9,14 +10,20 @@ export default {
      * @param {Object} state 状态
      */
     startLoad (state) {
-      state.isLoad = true
+      state.isLoadNum++
+      if (state.isLoadNum > 0) {
+        state.isLoad = true
+      }
     },
     /**
      * 停止加载
      * @param {Object} state 状态
      */
     stopLoad (state) {
-      state.isLoad = false
+      state.isLoadNum--
+      if (state.isLoadNum <= 0) {
+        state.isLoad = false
+      }
     }
   },
   actions: {}
