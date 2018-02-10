@@ -33,10 +33,21 @@ export default {
 }
 .web-logo {
   cursor: pointer;
-  transition: .5s;
+  animation: rotation 20s infinite;
 }
-.web-logo:hover {
-  transform: rotate(180deg);
+@keyframes rotation {
+  0% {
+    transform: rotate(0);
+  }
+  5% {
+    transform: rotate(180deg);
+  }
+  95% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
 }
 /* 登录头部样式开始 */
 .login-head-list {
